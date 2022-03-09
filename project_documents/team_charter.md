@@ -142,8 +142,8 @@ project management skills, develop public speaking skills, speak up more, speak
 up less, etc.**
 
 * Dixon: Improve analytical skills
-* Adam: 
-* Eric:
+* Adam: Time/task management, stay up to date
+* Eric: Learn front-end, javascript, listening skills
 
 ## Team Member Roles and Responsibilities
 
@@ -154,16 +154,15 @@ rotating or permanent roles as you go.*
 
 |**Role**               |**Responsibilities** |**Primary person** |**Secondary person** |
 |---                    |---                  |---                |---                  |
-|Liaison to Instructors | Main contact to instructor to give status updates, including team dynamics, project progress, etc |Dixon|Eric|
-|Rotating Role 1        |                     |                   |                     |
-|Rotating Role 2        |                     |                   |                     |
-|Rotating Role 3        |                     |                   |                     |
+|Liaison to Instructors | Main contact to instructor to give status updates, including team dynamics, project progress, etc |Dixon |Eric |
+|Documentation          | Keep documentation up to date, revise as needed, track design/task documents                      |Adam  | |
+|Github Organizer       | Track version control, github Pull Requests, resolve problems with branching/git issues           |Eric  |Dixon |
+
 
 ## Acknowledgement
 
 **I agree to the terms and conditions of these team agreements:**
 
-* Team member (a) Name & Date:
-* Team member (b) Name & Date:
-* Team member (c) Name & Date:
-* Team member (d) Name & Date:
+* Team member (Adam) Name & Date: Adam Schraedel : 3-9-22
+* Team member (Dixon) Name & Date: Dixon Kavanaugh : 3-9-22
+* Team member (Eric) Name & Date: Eric Lambert : 3-9-22
