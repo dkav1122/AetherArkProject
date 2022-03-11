@@ -97,7 +97,7 @@ creating, updating, retrieving, and deleting celestial bodies and solar systems.
 
 ![Aether_Ark_Class_Diagram](images/aether_ark_images/uml/aether_ark_CD.png)
 
-![Aether_Ark_User_Class](images/aether_ark_images/uml/User_Class_Diagram.png)
+![Aether_Ark_User_Class](images/aether_ark_images/uml/user_class_diagram.png)
 
 
 # 6. API
@@ -135,6 +135,8 @@ Accepts `GET` requests to `/user/:userId`
 Accepts a user ID and returns the corresponding UserModel.
 If the given user ID is not found, will throw a
      `UserNotFoundException`
+
+![Get_User_Sequence_Diagram](images/aether_ark_images/uml/get_user_SD.png)
 
 ## 6.3 CreateUser Endpoint
 
@@ -215,6 +217,8 @@ will throw a
 ## 6.11 DestroyAllCelestialBodies Endpoint
 Accepts `DELETE` requests to `/user/:userId/celestialBody`
 
+![Delete_CelestialBody_SD](images/aether_ark_images/uml/delete_celestial_body.png)
+
 ## 6.12 GetSolarSystem Endpoint
 Accepts `GET` requests to `/user/:userId/solarSystem/:solarSystemId`
 
@@ -225,6 +229,9 @@ If the given solar system ID is not found, will throw a
 Accepts `POST` requests to `/user/:userId/solarSystem/`
 ## 6.14 UpdateSolarSystem Endpoint
 Accepts `PUT` requests to `/user/:userId/solarSystem/:solarSystemId`
+
+![Update_SolarSystem_SD](images/aether_ark_images/uml/update_solar_system_SD.png)
+
 ## 6.15 DestroySolarSystem Endpoint
 Accepts `DELETE` requests to `/user/:userId/solarSystem/:solarSystemId`
 ## 6.16 GetAllSolarSystems Endpoint
