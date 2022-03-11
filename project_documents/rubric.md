@@ -1,4 +1,4 @@
-# [Team Name] Project Rubric
+# [Aether Ark] Project Rubric
 
 ## Background
 
@@ -21,7 +21,7 @@ We want you to see the full set of expectations for transparency’s sake.*
 |---                                                              |---                       |---            |---                               |
 |Team name                                                        |Sprint 1 Module 1         | 3/7/2022      |name: Aether_Ark                  |
 |[Design Document - problem statement](design_document.md)        |Sprint 1 Module 2         | 3/7/2022      |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/main/project_documents/aether_ark_design_document.md|
-|[Team Charter](team_charter.md)                                  |Sprint 1 Module 3         |               |                                  |
+|[Team Charter](team_charter.md)                                  |Sprint 1 Module 3         | 3/9/2022      |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/main/project_documents/team_charter.md                                  |
 |[Design Document](design_document.md)                            |Sprint 1 Friday by 5pm    |               |                                  |
 |Project Completion (Feature Complete)                            |Sprint 3 Friday by 5pm    |               |                                  |
 |[Team Reflection](reflection.md)                                 |Sprint 4 Wednesday by 5PM |               |                                  |
