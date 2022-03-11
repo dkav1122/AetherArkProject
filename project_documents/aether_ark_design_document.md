@@ -138,6 +138,8 @@ Accepts a user ID and returns the corresponding UserModel.
 If the given user ID is not found, will throw a
      `UserNotFoundException`
 
+![Create_Celestial_Body_Sequence_Diagram](images/aether_ark_images/uml/get_user_SD.png)
+
 ## 6.3 CreateUser Endpoint
 
 Accepts `POST` requests to `/user/`
@@ -224,6 +226,9 @@ will throw a
 `CelestialBodyNotFoundException`
 `UserNotFoundException`
 
+![Create_Celestial_Body_Sequence_Diagram](images/aether_ark_images/uml/delete_celestial_body.png)
+
+
 ## 6.10 GetAllCelestialBodies Endpoint
 *we might be able to this by getting the userModel. It contains a list of CelestialBodies*
 
@@ -290,11 +295,15 @@ Validate that there is at least one sun otherwise, will throw an
 will throw a
 `SolarSystemNotFoundException`
 `UserNotFoundException`
+
+![Create_Celestial_Body_Sequence_Diagram](images/aether_ark_images/uml/update_solar_system_SD.png)
+
+
 ## 6.15 DestroySolarSystem Endpoint
 Accepts `DELETE` requests to `/user/:userId/solarSystem/:solarSystemId`
 
 Accepts a user ID and solar system ID and deletes the solar system.
-Updates the user solarSystems list to reflect changes(Could fall out of scope).
+Updates the user solarSystems list to reflect changes.
 If no celestial bodies are found, will throw a
 `NoCelestialBodyFoundException`
 If the given user ID is not found, will throw a
@@ -304,7 +313,7 @@ If the given user ID is not found, will throw a
 Accepts `POST` requests to `/user/:userId/celestialBody/:celestialBodyId/solarSystem/:solarSystemId`
 
 Accepts a user ID, celestial body ID, solar system ID and adds the celestial body to the solar system's 
-celestialBodies list.
+celestialBodies list. Update the SolarSystem distance map
 at a default distance from the Sun/or "Center." The goal is to have all new objects visible to the user on add.
 If we could select the distance ahead of time that would be good as well. 
 Updates HomeSolarSystems attribute in the celestial table(Could fall out of scope).
@@ -317,16 +326,27 @@ will throw a
 ## 6.17 UpdateCelestialBodyInSolarSystem EndPoint 
 Accepts `PUT` requests to `/user/:userId/celestialBody/:celestialBodyId/solarSystem/:solarSystemId`
 
-Accepts a user ID, celestial body ID, solar system ID and updates the celestial body in the solar system.
-Updates are made to celestial body to reflect the changes in the solar system
- (updates planet in
-planets table and solar system)
+Accepts a user ID, celestial body ID, solar system ID and updates the celestial body in the solar system
+as well as any other solarSystem attributes. Update User if it is affected
+Updates are made to CelestialBody to reflect the changes in the solar system(Could fall out of scope).
+Update User
+
+will throw a
+`UserNotFoundException`
+`CelestialBodyNotFound`
+`SolarSystemNotFoundException`
+`InvalidDistanceException`
 
 ## 6.18 DestroyACelestialBodyFromASolarSystem EndPoint
 Accepts `PUT` requests to `/user/:userId/celestialBody/:celestialBodyId/solarSystem/:solarSystemId`
 
-Accepts a user ID, celestial body ID, solar system ID and deletes the celestial body in the solar system
+Accepts a user ID, celestial body ID, solar system ID and deletes the celestial body in the solar system.
+Updated other solarSystem attributes to reflect change. Update User and CelestialBody to reflect change.
 
+will throw a
+`UserNotFoundException`
+`CelestialBodyNotFound`
+`SolarSystemNotFoundException`
 
 ## 6.19 GetAllSolarSystems Endpoint
 *we might be able to this by getting the userModel. It contains a list of SolarSystems*
@@ -338,7 +358,6 @@ Accepts `DELETE` requests to `/user/:userId`
 # 7. Tables
 
 ![Tables UML Diagram](images/aether_ark_images/uml/aether_ark_tables_ERD.png)
-
 
 # 8. Pages
 
