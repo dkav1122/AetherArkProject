@@ -23,7 +23,9 @@ separately and then added or removed from a solar system.
 10. Can users create a multiple star system?
 11. Should we have motion?
 12. Do we want to connect to an outside API?
-13. Should we use a DAO interface? Would it have
+13. Should we use a DAO interface? Would it have a benefit?
+14. What is our MAX? Distance from sun, mass, diameter, amount of bodies, amount of 
+solar systems, bodies in solar systems
 
 ## 3. Use Cases
 
@@ -39,9 +41,8 @@ As an Aether Ark customer I want to:
 8. Update an individual solar system.
     1. Update my solar systems name.
     2. Add a planet with a distance in relation to it's star(s).
-    3. Change the distance of a planet in the solar system.
-    4. Delete a plant from the solar system. DESTROY!
-    5. Make changes to an individual planet within a solar system. (updates planet in 
+    3. Delete a plant from the solar system. DESTROY!
+    4. Make changes to an individual planet within a solar system. (updates planet in 
    planets table and solar system)
 9. Delete a solar system.
 10. Delete all of my solar systems.
@@ -78,12 +79,13 @@ This initial iteration will provide the minimum viable product including creatin
 destroying a custom solar system through a front-end user interface. It will also provide the ability to create, 
 update, retrieve and destroy
 individual celestial bodies, as well as add and remove them from solar systems(the update functionality)
-We will use API Gateway and Lambda to create 16 endpoints
+We will use API Gateway and Lambda to create 19 endpoints
 (CreateUser, GetUser, UpdateUser, DestroyUser, 
 CreateCelestialBody, GetCelestialBody, UpdateCelestialBody, DestroyCelestialBody, 
 DestroyAllCelestialBodies,
 CreateSolarSystem, GetSolarSystem, UpdateSolarSystem, DestroySolarSystem,
-GetAllSolarSystems, DestroyAllSolarSystems)
+GetAllSolarSystems, DestroyAllSolarSystems, AddACelestialBodyToSolarSystem, UpdateCelestialBodyInSolarSystem,
+DestroyACelestialBodyFromASolarSystem)
 
 We will store celestial bodies available for solar systems in a DynamoDB table. 
 Solar systems themselves will also be stored in a DynamoDB table.
@@ -153,8 +155,7 @@ If the given username already exists, will throw a
 ##6.4 UpdateUser Endpoint
 Accepts `PUT` requests to `/user/:userId`
 
-Accepts data to update a user with a provided user ID and any changes to email.
-If there are no changes, persist the data in the request.
+Accepts user ID and data to update a user with any changes to email
 Returns the updated User.
 The username may not be updated at the moment.
 For security concerns, we will validate the provided username has not changed.
@@ -166,26 +167,28 @@ If the given user ID is not found, will throw a
 ##6.5 DestroyUser Endpoint
 Accepts `DELETE` requests to `/user/:userId`
 
-Accepts a user ID and deletes ALL user data from this service. 
+Accepts a user ID and deletes ALL!!! user data from this service. 
 Returns the deleted user.
 Will throw a
 `UserNotFoundException`
 
 ## 6.6 GetCelestialBody Endpoint
-Accepts `GET` requests to `/user/:userId/celestialBody/:id`
+Accepts `GET` requests to `/user/:userId/celestialBody/:celestialBodyId`
 
-Accepts a celestialBody ID and returns the corresponding CelestialBodyModel.
+Accepts a user ID and celestialBody ID and returns the corresponding CelestialBodyModel.
 If the given celestialBody ID is not found, will throw a
 `CelestialBodyNotFoundException`
+If the given user ID is not found, will throw a
+`UserNotFoundException`
 
 ## 6.7 CreateCelestialBody Endpoint
 Accepts `POST` requests to `/user/:userId/celestialBody`
 
-Accepts data to create a new celestial body with a provided name, mass, diameter,
-and composition.
+Accepts userId and data to create a new celestial body with a provided name, mass, diameter,
+and composition. Updates user celestialBodyIds list to include new celestialBody.
 Returns the new celestial body, including a unique ID assigned by the Aether_Ark Service
 Utility.
-For security concerns, we will validate the provided celestial body does not
+For security concerns, we will validate the provided celestial body name does not
 contain any invalid characters: `" ' \ `
 If the celestial body contains any of the invalid characters, will throw an
 `InvalidAttributeValueException`.
@@ -195,50 +198,146 @@ The mass and diameter must be greater than 1 otherwise, will throw an
 ![Create_Celestial_Body_Sequence_Diagram](images/aether_ark_images/uml/create_celestial_body_SD.png)
 
 ## 6.8 UpdateCelestialBody Endpoint
-Accepts `PUT` requests to `/user/:userId/celestialBody/:id`
+Accepts `PUT` requests to `/user/:userId/celestialBody/:celestialBodyId`
 
+Accepts userId, celestial body ID and data to update a celestial body with any changes to name, mass, diameter,
+and composition. Updates homeSolarSystems to reflect new changes in celestialBody (This could optionally fall out 
+of scope to provide MVP)
+Returns the celestial body.
+For security concerns, we will validate the provided celestial body name does not
+contain any invalid characters: `" ' \ `
+If the celestial body contains any of the invalid characters, will throw an
+`InvalidAttributeValueException`.
+Validate mass and diameter greater than 1 otherwise, will throw an
+`InvalidAttributeValueException`
 will throw a
 `CelestialBodyNotFoundException`
+`UserNotFoundException`
 
 ## 6.9 DestroyCelestialBody Endpoint
-Accepts `DELETE` requests to `/user/:userId/celestialBody/:id`
+Accepts `DELETE` requests to `/user/:userId/celestialBody/:celestialBodyId`
 
+Accepts a user ID, celestial body ID, and deletes the celestial body from this service.
+Updates user celestialBodyIds list to reflect deleted celestialBody.
+Returns the deleted celestial body.
 will throw a
 `CelestialBodyNotFoundException`
+`UserNotFoundException`
 
 ## 6.10 GetAllCelestialBodies Endpoint
-Accepts `GET` requests to `/user/:userId/celestialBody/`
+*we might be able to this by getting the userModel. It contains a list of CelestialBodies*
 
+Accepts `GET` requests to `/user/:userId`
+
+Accepts a user ID and returns the list of all celestial bodies
 will throw a
-`CelestialBodyNotFoundException`
+`NoCelestialBodyFoundException`
+`UserNotFoundException`
 
 ## 6.11 DestroyAllCelestialBodies Endpoint
-Accepts `DELETE` requests to `/user/:userId/celestialBody`
+*we might be able to do this by updating the userModel. It contains a list of CelestialBodies*
+
+Accepts `DELETE` requests to `/user/:userId`
+
+Accepts a user ID and returns the list of all celestialBodies
+If no celestial bodies are found, will throw a
+`NoCelestialBodyFoundException`
+If the given user ID is not found, will throw a
+`UserNotFoundException`
 
 ## 6.12 GetSolarSystem Endpoint
 Accepts `GET` requests to `/user/:userId/solarSystem/:solarSystemId`
 
-Accepts a solar system ID and returns the corresponding solar system model.
+Accepts a user ID, solar system ID, and returns the corresponding solar system model.
 If the given solar system ID is not found, will throw a
 `SolarSystemNotFoundException`
+If the given user ID is not found, throw a
+`UserNotFoundException`
+
 ## 6.13 CreateSolarSystem Endpoint
 Accepts `POST` requests to `/user/:userId/solarSystem/`
+
+Accepts a user ID, solar system ID, and data to create a new solar system with provided name, 
+and one star at the center of the system with a base diameter and mass TBD. The star is put in the users
+celestialBodyIds list(Should we?). The name of the star is {default} to the name of the solarsystem+{SUN}. 
+The solar system ID is added to the user solarSystemIds list.
+Returns the new solar system model, including a unique ID assigned by the Aether_Ark Service
+Utility.
+We will validate the solar system name does not
+contain any invalid characters: `" ' \ `
+If so, will throw an
+`InvalidAttributeValueException`.
+The mass and diameter must be greater than 1 otherwise, will throw an
+`InvalidAttributeValueException`
+will throw
+`NoSolarSystemFoundException`
+`UserNotFoundException`
+
 ## 6.14 UpdateSolarSystem Endpoint
 Accepts `PUT` requests to `/user/:userId/solarSystem/:solarSystemId`
+
+Accepts userId, solar system ID and data to update a solar system with any changes to name,
+distanceFromStarMap, and CelestialBodies list. 
+Update the changes in the user ID lists (CelestialBodyIds and SolarSystemIds).
+Update the changes to the celestialBody table(This relational operation could fall out of scope if need be).
+Returns the updated solar system model.
+For security concerns, we will validate the provided solar system name does not
+contain any invalid characters: `" ' \ `
+If the solar system contains any invalid characters, will throw an
+`InvalidAttributeValueException`.
+Validate that there is at least one sun otherwise, will throw an
+`InvalidAttributeValueException`
+will throw a
+`SolarSystemNotFoundException`
+`UserNotFoundException`
 ## 6.15 DestroySolarSystem Endpoint
 Accepts `DELETE` requests to `/user/:userId/solarSystem/:solarSystemId`
-## 6.16 GetAllSolarSystems Endpoint
-Accepts `GET` requests to `/user/:userId/solarSystem/`
-## 6.17 DestroyAllSolarSystems Endpoint
-Accepts `DELETE` requests to `/user/:userId/solarSystem/`
+
+Accepts a user ID and solar system ID and deletes the solar system.
+Updates the user solarSystems list to reflect changes(Could fall out of scope).
+If no celestial bodies are found, will throw a
+`NoCelestialBodyFoundException`
+If the given user ID is not found, will throw a
+`UserNotFoundException`
+
+## 6.16 AddACelestialBodyToSolarSystem EndPoint
+Accepts `POST` requests to `/user/:userId/celestialBody/:celestialBodyId/solarSystem/:solarSystemId`
+
+Accepts a user ID, celestial body ID, solar system ID and adds the celestial body to the solar system's 
+celestialBodies list.
+at a default distance from the Sun/or "Center." The goal is to have all new objects visible to the user on add.
+If we could select the distance ahead of time that would be good as well. 
+Updates HomeSolarSystems attribute in the celestial table(Could fall out of scope).
+will throw a
+`UserNotFoundException`
+`CelestialBodyNotFound`
+`SolarSystemNotFoundException`
+`InvalidDistanceException`
+
+## 6.17 UpdateCelestialBodyInSolarSystem EndPoint 
+Accepts `PUT` requests to `/user/:userId/celestialBody/:celestialBodyId/solarSystem/:solarSystemId`
+
+Accepts a user ID, celestial body ID, solar system ID and updates the celestial body in the solar system.
+Updates are made to celestial body to reflect the changes in the solar system
+ (updates planet in
+planets table and solar system)
+
+## 6.18 DestroyACelestialBodyFromASolarSystem EndPoint
+Accepts `PUT` requests to `/user/:userId/celestialBody/:celestialBodyId/solarSystem/:solarSystemId`
+
+Accepts a user ID, celestial body ID, solar system ID and deletes the celestial body in the solar system
+
+
+## 6.19 GetAllSolarSystems Endpoint
+*we might be able to this by getting the userModel. It contains a list of SolarSystems*
+Accepts `GET` requests to `/user/:userId`
+## 6.20 DestroyAllSolarSystems Endpoint
+*we might be able to this by getting the userModel. It contains a list of SolarSystems*
+Accepts `DELETE` requests to `/user/:userId`
 
 # 7. Tables
 
 ![Tables UML Diagram](images/aether_ark_images/uml/aether_ark_tables_ERD.png)
-
-![Tables_PUML_Test](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/BloomTechBackend/bd-team-project-aether_ark/project_documents/images/aether_ark_images/uml/aether_ark_tables_ERD.puml)
-
-
 
 
 # 8. Pages
