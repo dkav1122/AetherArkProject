@@ -236,10 +236,6 @@ Accepts `DELETE` requests to `/user/:userId/solarSystem/`
 
 ![Tables UML Diagram](images/aether_ark_images/uml/aether_ark_tables_ERD.png)
 
-![Tables_PUML_Test](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/BloomTechBackend/bd-team-project-aether_ark/project_documents/images/aether_ark_images/uml/aether_ark_tables_ERD.puml)
-
-
-
 
 # 8. Pages
 
