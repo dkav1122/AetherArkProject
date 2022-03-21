@@ -309,45 +309,6 @@ If no celestial bodies are found, will throw a
 If the given user ID is not found, will throw a
 `UserNotFoundException`
 
-## 6.16 AddACelestialBodyToSolarSystem EndPoint
-Accepts `POST` requests to `/user/:userId/celestialBody/:celestialBodyId/solarSystem/:solarSystemId`
-
-Accepts a user ID, celestial body ID, solar system ID and adds the celestial body to the solar system's 
-celestialBodies list. Update the SolarSystem distance map
-at a default distance from the Sun/or "Center." The goal is to have all new objects visible to the user on add.
-If we could select the distance ahead of time that would be good as well. 
-Updates HomeSolarSystems attribute in the celestial table(Could fall out of scope).
-will throw a
-`UserNotFoundException`
-`CelestialBodyNotFound`
-`SolarSystemNotFoundException`
-`InvalidDistanceException`
-
-## 6.17 UpdateCelestialBodyInSolarSystem EndPoint 
-Accepts `PUT` requests to `/user/:userId/celestialBody/:celestialBodyId/solarSystem/:solarSystemId`
-
-Accepts a user ID, celestial body ID, solar system ID and updates the celestial body in the solar system
-as well as any other solarSystem attributes. Update User if it is affected
-Updates are made to CelestialBody to reflect the changes in the solar system(Could fall out of scope).
-Update User
-
-will throw a
-`UserNotFoundException`
-`CelestialBodyNotFound`
-`SolarSystemNotFoundException`
-`InvalidDistanceException`
-
-## 6.18 DestroyACelestialBodyFromASolarSystem EndPoint
-Accepts `PUT` requests to `/user/:userId/celestialBody/:celestialBodyId/solarSystem/:solarSystemId`
-
-Accepts a user ID, celestial body ID, solar system ID and deletes the celestial body in the solar system.
-Updated other solarSystem attributes to reflect change. Update User and CelestialBody to reflect change.
-
-will throw a
-`UserNotFoundException`
-`CelestialBodyNotFound`
-`SolarSystemNotFoundException`
-
 ## 6.19 GetAllSolarSystems Endpoint
 *we might be able to this by getting the userModel. It contains a list of SolarSystems*
 Accepts `GET` requests to `/user/:userId`
