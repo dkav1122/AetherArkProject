@@ -203,8 +203,7 @@ The mass and diameter must be greater than 1 otherwise, will throw an
 Accepts `PUT` requests to `/user/:userId/celestialBody/:celestialBodyId`
 
 Accepts userId, celestial body ID and data to update a celestial body with any changes to name, mass, diameter,
-and composition. Updates homeSolarSystems to reflect new changes in celestialBody (This could optionally fall out 
-of scope to provide MVP)
+and composition. Updates homeSolarSystems to reflect new changes in celestialBody.
 Returns the celestial body.
 For security concerns, we will validate the provided celestial body name does not
 contain any invalid characters: `" ' \ `
@@ -220,7 +219,7 @@ will throw a
 Accepts `DELETE` requests to `/user/:userId/celestialBody/:celestialBodyId`
 
 Accepts a user ID, celestial body ID, and deletes the celestial body from this service.
-Updates user celestialBodyIds list to reflect deleted celestialBody.
+Updates user and solarSystem celestialBodyIds list to reflect deleted celestialBody.
 Returns the deleted celestial body.
 will throw a
 `CelestialBodyNotFoundException`
@@ -262,9 +261,7 @@ If the given user ID is not found, throw a
 ## 6.13 CreateSolarSystem Endpoint
 Accepts `POST` requests to `/user/:userId/solarSystem/`
 
-Accepts a user ID, solar system ID, and data to create a new solar system with provided name, 
-and one star at the center of the system with a base diameter and mass TBD. The star is put in the users
-celestialBodyIds list(Should we?). The name of the star is {default} to the name of the solarsystem+{SUN}. 
+Accepts a user ID, solar system ID, and solar system name to create a new solar system. 
 The solar system ID is added to the user solarSystemIds list.
 Returns the new solar system model, including a unique ID assigned by the Aether_Ark Service
 Utility.
@@ -284,7 +281,7 @@ Accepts `PUT` requests to `/user/:userId/solarSystem/:solarSystemId`
 Accepts userId, solar system ID and data to update a solar system with any changes to name,
 distanceFromStarMap, and CelestialBodies list. 
 Update the changes in the user ID lists (CelestialBodyIds and SolarSystemIds).
-Update the changes to the celestialBody table(This relational operation could fall out of scope if need be).
+Update the changes to the celestialBody table.
 Returns the updated solar system model.
 For security concerns, we will validate the provided solar system name does not
 contain any invalid characters: `" ' \ `
@@ -309,10 +306,10 @@ If no celestial bodies are found, will throw a
 If the given user ID is not found, will throw a
 `UserNotFoundException`
 
-## 6.19 GetAllSolarSystems Endpoint
+## 6.16 GetAllSolarSystems Endpoint
 *we might be able to this by getting the userModel. It contains a list of SolarSystems*
 Accepts `GET` requests to `/user/:userId`
-## 6.20 DestroyAllSolarSystems Endpoint
+## 6.17 DestroyAllSolarSystems Endpoint
 *we might be able to this by getting the userModel. It contains a list of SolarSystems*
 Accepts `DELETE` requests to `/user/:userId`
 
