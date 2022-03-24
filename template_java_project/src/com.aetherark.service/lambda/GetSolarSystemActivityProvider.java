@@ -1,5 +1,6 @@
 package com.aetherark.service.lambda;
 
+import com.aetherark.service.dependency.ServiceComponent;
 import com.aetherark.service.models.requests.GetSolarSystemRequest;
 import com.aetherark.service.models.results.GetSolarSystemResult;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -14,7 +15,7 @@ public class GetSolarSystemActivityProvider implements RequestHandler<GetSolarSy
     }
 
     @Override
-    public GetSolarSystemRequest handleRequest(final GetSolarSystemRequest getSolarSystemRequest, Context context) {
+    public GetSolarSystemResult handleRequest(final GetSolarSystemRequest getSolarSystemRequest, Context context) {
         return getServiceComponent().provideGetSolarSystemActivity().handleRequest(getSolarSystemRequest, context);
     }
 

@@ -69,6 +69,9 @@ dependencies {
     // https://jmaven.com/maven/com.github.bibsysdev/dynamodb
     implementation 'com.github.bibsysdev:dynamodb:1.20.23-alpha2'
 
+    // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb
+    implementation group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.12.182'
+
 
 //for random id generator
     // https://mvnrepository.com/artifact/org.apache.commons/commons-text

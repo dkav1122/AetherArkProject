@@ -1,10 +1,12 @@
 package com.aetherark.service.activity;
 
+import com.aetherark.service.converters.ModelConverter;
 import com.aetherark.service.dynamodb.SolarSystemDao;
 import com.aetherark.service.dynamodb.UserDao;
 import com.aetherark.service.dynamodb.models.CelestialBody;
 import com.aetherark.service.dynamodb.models.SolarSystem;
 import com.aetherark.service.exceptions.InvalidAttributeException;
+import com.aetherark.service.models.SolarSystemModel;
 import com.aetherark.service.models.requests.CreateSolarSystemRequest;
 import com.aetherark.service.models.results.CreateSolarSystemResult;
 import com.aetherark.service.util.AetherArkServiceUtils;
@@ -58,12 +60,12 @@ public class CreateSolarSystemActivity implements RequestHandler<CreateSolarSyst
         userDao.addToUserSolarSystemIds(solarSystem.getUsername(), solarSystem.getSystemId());
         */
 
-      //  SolarSystemModel solarSystemModel = new ModelConverter().toSolarSystemModel(solarSystem);
+        SolarSystemModel solarSystemModel = new ModelConverter().toSolarSystemModel(solarSystem);
 
         solarSystemDao.saveSolarSystem(solarSystem);
 
         return CreateSolarSystemResult.builder()
-                //withSolarSystemModel(solarSystemModel)
+                .withSolarSystemModel(solarSystemModel)
                 .build();
     }
 }
