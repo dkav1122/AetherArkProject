@@ -1,5 +1,8 @@
 package com.aetherark.service.models;
 
+import com.aetherark.service.dynamodb.models.CelestialBody;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -88,7 +91,7 @@ public class SolarSystemModel {
         private String username;
 
         public Builder withSystemId(String idToUse) {
-            this.id = idToUse;
+            this.systemId = idToUse;
             return this;
         }
 
