@@ -16,7 +16,7 @@ public class CelestialBody {
     private Integer diameter;
     private Integer mass;
     private String composition;
-    private List<String> memberSolarSystems;
+    private List<SolarSystem> memberSolarSystems;
 
     @DynamoDBHashKey(attributeName = "id")
     public String getId() {
@@ -73,11 +73,11 @@ public class CelestialBody {
     }
 
     @DynamoDBAttribute(attributeName = "solar_systems")
-    public List<String> getMemberSolarSystems() {
+    public List<SolarSystem> getMemberSolarSystems() {
         return memberSolarSystems;
     }
 
-    public void setMemberSolarSystems(List<String> memberSolarSystems) {
+    public void setMemberSolarSystems(List<SolarSystem> memberSolarSystems) {
         this.memberSolarSystems = memberSolarSystems;
     }
 }

@@ -1,5 +1,7 @@
 package com.aetherark.service.models;
 
+import com.aetherark.service.dynamodb.models.SolarSystem;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +12,7 @@ public class CelestialBodyModel {
     private Integer diameter;
     private Integer mass;
     private String composition;
-    private List<String> memberSolarSystems;
+    private List<SolarSystem> memberSolarSystems;
 
     public CelestialBodyModel() {
 
@@ -65,11 +67,11 @@ public class CelestialBodyModel {
         this.composition = composition;
     }
 
-    public List<String> getMemberSolarSystems() {
+    public List<SolarSystem> getMemberSolarSystems() {
         return memberSolarSystems;
     }
 
-    public void setMemberSolarSystems(List<String> memberSolarSystems) {
+    public void setMemberSolarSystems(List<SolarSystem> memberSolarSystems) {
         this.memberSolarSystems = memberSolarSystems;
     }
 
@@ -108,7 +110,7 @@ public class CelestialBodyModel {
         private Integer diameter;
         private Integer mass;
         private String composition;
-        private List<String> memberSolarSystems;
+        private List<SolarSystem> memberSolarSystems;
 
         public Builder withId(String givenId) {
             this.id = givenId;
@@ -135,7 +137,7 @@ public class CelestialBodyModel {
             return this;
         }
 
-        public Builder withSolarSystems(List<String> givenSolarSystems) {
+        public Builder withSolarSystems(List<SolarSystem> givenSolarSystems) {
             if (givenSolarSystems == null || givenSolarSystems.isEmpty()) {
                 this.memberSolarSystems = null;
             } else {
