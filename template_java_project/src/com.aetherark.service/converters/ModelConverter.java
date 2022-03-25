@@ -51,7 +51,6 @@ public class ModelConverter {
      */
     public UserModel toUserModel(User user) {
         return UserModel.builder()
-                .withId(user.getId())
                 .withName(user.getName())
                 .withEmail(user.getEmail())
                 .withSolarSystemIds(user.getSolarSystemIds())

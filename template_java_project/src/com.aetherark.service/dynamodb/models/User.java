@@ -12,27 +12,16 @@ import java.util.Objects;
  */
 @DynamoDBTable(tableName = "Users")
 public class User {
-    private String id;
     private String name;
     private String email;
     private List<String> solarSystemIds;
     private List<String> celestialBodyIds;
-    private static final String ID = "id";
     private static final String NAME = "name";
     private static final String EMAIL = "email";
     private static final String SOLAR_SYSTEM_IDS = "solarSystemIds";
     private static final String CELESTIAL_BODY_IDS = "celestialBodyIds";
 
-    @DynamoDBHashKey(attributeName = ID)
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @DynamoDBAttribute(attributeName = NAME)
+    @DynamoDBHashKey(attributeName = NAME)
     public String getName() {
         return name;
     }
@@ -73,21 +62,18 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getId()) && Objects.equals(getName(),
-                user.getName()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getSolarSystemIds(),
-                user.getSolarSystemIds()) && Objects.equals(getCelestialBodyIds(), user.getCelestialBodyIds());
+        return Objects.equals(getName(), user.getName()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getSolarSystemIds(), user.getSolarSystemIds()) && Objects.equals(getCelestialBodyIds(), user.getCelestialBodyIds());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getEmail(), getSolarSystemIds(), getCelestialBodyIds());
+        return Objects.hash(getName(), getEmail(), getSolarSystemIds(), getCelestialBodyIds());
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", solarSystemIds=" + solarSystemIds +
                 ", celestialBodyIds=" + celestialBodyIds +

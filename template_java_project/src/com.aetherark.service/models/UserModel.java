@@ -7,7 +7,6 @@ import java.util.Objects;
  * UserModel for result objects.
  */
 public class UserModel {
-    private String id;
     private String name;
     private String email;
     private List<String> solarSystemIds;
@@ -20,7 +19,6 @@ public class UserModel {
     }
 
     private UserModel(Builder builder) {
-        this.id = builder.id;
         this.name = builder.name;
         this.email = builder.email;
         this.solarSystemIds = builder.solarSystemIds;
@@ -32,16 +30,10 @@ public class UserModel {
     }
 
     public static final class Builder {
-        private String id;
         private String name;
         private String email;
         private List<String> solarSystemIds;
         private List<String> celestialBodyIds;
-        
-        public Builder withId(String idToUse){
-            this.id = idToUse;
-            return this;
-        }
         
         public Builder withName(String nameToUse){
             this.name = nameToUse;
@@ -66,14 +58,6 @@ public class UserModel {
         public UserModel build() {
             return new UserModel(this);
         }
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -113,23 +97,21 @@ public class UserModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserModel userModel = (UserModel) o;
-        return Objects.equals(getId(), userModel.getId()) && Objects.equals(getName(), userModel.getName()) && Objects.equals(getEmail(), userModel.getEmail()) && Objects.equals(getSolarSystemIds(), userModel.getSolarSystemIds()) && Objects.equals(getCelestialBodyIds(), userModel.getCelestialBodyIds());
+        return Objects.equals(getName(), userModel.getName()) && Objects.equals(getEmail(), userModel.getEmail()) && Objects.equals(getSolarSystemIds(), userModel.getSolarSystemIds()) && Objects.equals(getCelestialBodyIds(), userModel.getCelestialBodyIds());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getEmail(), getSolarSystemIds(), getCelestialBodyIds());
+        return Objects.hash(getName(), getEmail(), getSolarSystemIds(), getCelestialBodyIds());
     }
 
     @Override
     public String toString() {
         return "UserModel{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", solarSystemIds=" + solarSystemIds +
                 ", celestialBodyIds=" + celestialBodyIds +
                 '}';
     }
-
 }

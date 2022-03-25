@@ -90,4 +90,34 @@ public class UserDao {
 
         return solarSystemId;
     }
+
+    /**
+     * Adds a CelestialBodyId to our database.
+     *
+     * @param username The user to add the CelestialBodyId to.
+     * @param CelestialBodyId The CelestialBodyId to be added
+     * @return CelestialBodyId that was added to the database
+     */
+    public String addToUserCelestialBodyId(String username, String CelestialBodyId) {
+        User user = getUser(username);
+        user.getCelestialBodyIds().add(CelestialBodyId);
+        saveUser(user);
+
+        return CelestialBodyId;
+    }
+
+    /**
+     * Deletes a solarSystemId from our database.
+     *
+     * @param username The user to delete the CelestialBodyId from.
+     * @param CelestialBodyId The CelestialBodyId to be deleted
+     * @return CelestialBodyId that was deleted from the database
+     */
+    public String removeFromCelestialBodyId(String username, String CelestialBodyId) {
+        User user = getUser(username);
+        user.getCelestialBodyIds().remove(CelestialBodyId);
+        saveUser(user);
+
+        return CelestialBodyId;
+    }
 }
