@@ -1,6 +1,7 @@
 package com.aetherark.service.dynamodb;
 
 import com.aetherark.service.dynamodb.models.User;
+import com.aetherark.service.exceptions.UserNotFoundException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
@@ -29,11 +30,11 @@ public class UserDao {
      * @param name the username
      * @return the stored User, or if the given username is not found, will throw a UserNotFoundException.
      */
-    public User getUser(String name){
+    public User getUser(String name) throws UserNotFoundException{
         User user = this.dynamoDBMapper.load(User.class, name);
 
         if (user == null) {
-            //todo throw new UserNotFoundException("User: " + name + " not found.")
+            throw new UserNotFoundException("User: " + name + " not found.");
         }
         return user;
     }
@@ -60,4 +61,33 @@ public class UserDao {
         return user;
     }
 
+    /**
+     * Adds a solarSystemId to our database.
+     *
+     * @param username The user to add the solarSystemId to.
+     * @param solarSystemId The solarSystemId to be added
+     * @return solarSystemId that was added to the database
+     */
+    public String addToUserSolarSystemId(String username, String solarSystemId) {
+        User user = getUser(username);
+        user.getSolarSystemIds().add(solarSystemId);
+        saveUser(user);
+
+        return solarSystemId;
+    }
+
+    /**
+     * Deletes a solarSystemId from our database.
+     *
+     * @param username The user to delete the solarSystemId from.
+     * @param solarSystemId The solarSystemId to be deleted
+     * @return solarSystemId that was deleted from the database
+     */
+    public String removeFromUserSolarSystemId(String username, String solarSystemId) {
+        User user = getUser(username);
+        user.getSolarSystemIds().remove(solarSystemId);
+        saveUser(user);
+
+        return solarSystemId;
+    }
 }
