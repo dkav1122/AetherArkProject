@@ -5,6 +5,7 @@ import com.aetherark.service.exceptions.SolarSystemNotFoundException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class SolarSystemDao {
 
@@ -36,5 +37,11 @@ public class SolarSystemDao {
         this.dynamoDBMapper.delete(solarSystem);
 
         return solarSystem;
+    }
+
+    public void deleteAllSolarSystemForUser(List<String> solarSystemId) {
+
+        dynamoDBMapper.batchDelete(solarSystemId);
+
     }
 }
