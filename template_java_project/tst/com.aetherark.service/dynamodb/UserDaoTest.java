@@ -8,10 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -33,7 +29,7 @@ class UserDaoTest {
     public void getUser_withUsername_returnUser() {
         //GIVEN
         String expectedUsername = "expectedName";
-        User expectedUser = userHelper(expectedUsername);
+        User expectedUser = UserTestHelper.expectedUser(expectedUsername);
         when(dynamoDBMapper.load(User.class, expectedUsername)).thenReturn(expectedUser);
         //WHEN
         User user = userDao.getUser(expectedUsername);
@@ -43,10 +39,11 @@ class UserDaoTest {
 
     @Test
     public void getUser_withUsernameNotFound_throwsUserNotFoundException() {
+        //This test seems a bit redundant
         //GIVEN
         String expectedUsername = "expectedName";
-        String differentUsername = "Eric";
-        when(dynamoDBMapper.load(User.class, differentUsername)).thenThrow(UserNotFoundException.class);
+        User expectedUser = UserTestHelper.expectedUser(expectedUsername);
+        when(dynamoDBMapper.load(User.class, expectedUser)).thenThrow(new UserNotFoundException());
         //WHEN + // THEN
         assertThrows(UserNotFoundException.class, () -> userDao.getUser(expectedUsername));
     }
@@ -55,7 +52,7 @@ class UserDaoTest {
     public void saveUser_withUserFound_returnsUser() {
         //GIVEN
         String expectedUsername = "expectedName";
-        User expectedUser = userHelper(expectedUsername);
+        User expectedUser = UserTestHelper.expectedUser(expectedUsername);
         //WHEN
         User user = userDao.saveUser(expectedUser);
         //THEN
@@ -67,7 +64,7 @@ class UserDaoTest {
     public void deleteUser_withUsername_returnsUser() {
         //GIVEN
         String expectedUsername = "expectedName";
-        User expectedUser = userHelper(expectedUsername);
+        User expectedUser = UserTestHelper.expectedUser(expectedUsername);
         //WHEN
         User user = userDao.deleteUser(expectedUser);
         //THEN
@@ -80,7 +77,7 @@ class UserDaoTest {
         //GIVEN
         String expectedUsername = "expectedName";
         String solarSystemId = "5";
-        User expectedUser = userHelper(expectedUsername);
+        User expectedUser = UserTestHelper.expectedUser(expectedUsername);
         when(dynamoDBMapper.load(User.class, expectedUsername)).thenReturn(expectedUser);
         //WHEN
         userDao.addToUserSolarSystemId(expectedUsername, solarSystemId);
@@ -94,7 +91,7 @@ class UserDaoTest {
         //GIVEN
         String expectedUsername = "expectedName";
         String solarSystemId = "4";
-        User expectedUser = userHelper(expectedUsername);
+        User expectedUser = UserTestHelper.expectedUser(expectedUsername);
         when(dynamoDBMapper.load(User.class, expectedUsername)).thenReturn(expectedUser);
         //WHEN
         userDao.removeFromUserSolarSystemId(expectedUsername,solarSystemId);
@@ -108,7 +105,7 @@ class UserDaoTest {
         //GIVEN
         String expectedUsername = "expectedName";
         String CelestialBodyId = "10";
-        User expectedUser = userHelper(expectedUsername);
+        User expectedUser = UserTestHelper.expectedUser(expectedUsername);
         when(dynamoDBMapper.load(User.class, expectedUsername)).thenReturn(expectedUser);
         //WHEN
             userDao.addToUserCelestialBodyId(expectedUsername,CelestialBodyId);
@@ -122,7 +119,7 @@ class UserDaoTest {
         //GIVEN
         String expectedUsername = "expectedName";
         String CelestialBodyId = "9";
-        User expectedUser = userHelper(expectedUsername);
+        User expectedUser = UserTestHelper.expectedUser(expectedUsername);
         when(dynamoDBMapper.load(User.class, expectedUsername)).thenReturn(expectedUser);
         //WHEN
         userDao.removeFromCelestialBodyId(expectedUsername,CelestialBodyId);
@@ -131,20 +128,4 @@ class UserDaoTest {
         verify(dynamoDBMapper, times(1)).save(expectedUser);
     }
 
-    private static User userHelper(String name) {
-        String expectedUsername = name;
-        String expectedEmail = "www.expected@aetherark.com";
-        String[] expectedSolarSystemIdsArray = new String[]{"1", "2", "3", "4"};
-        String[] expectedCelestialBodyIdsArray = new String[]{"6", "7", "8", "9"};
-        List<String> expectedSolarSystemIds = new ArrayList<>(Arrays.asList(expectedSolarSystemIdsArray));
-        List<String> expectedCelestialBodyIds = new ArrayList<>(Arrays.asList(expectedCelestialBodyIdsArray));
-
-        User expectedUser = new User();
-        expectedUser.setName(expectedUsername);
-        expectedUser.setEmail(expectedEmail);
-        expectedUser.setSolarSystemIds(expectedSolarSystemIds);
-        expectedUser.setCelestialBodyIds(expectedCelestialBodyIds);
-
-        return expectedUser;
-    }
 }

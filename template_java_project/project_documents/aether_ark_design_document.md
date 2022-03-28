@@ -106,8 +106,7 @@ creating, updating, retrieving, and deleting celestial bodies and solar systems.
 
 ## 6.1. Public Models
 ````
-//UserModel
-String id; 
+//UserModel 
 String name; 
 String email; 
 List<String> solarSystemIds; 
@@ -132,11 +131,12 @@ Map<String, Integer> distanceFromStar;
 
 ## 6.2. GetUser Endpoint
 
-Accepts `GET` requests to `/user/:userId`
+Accepts `GET` requests to `/user/:username`
 
-Accepts a user ID and returns the corresponding UserModel.
-If the given user ID is not found, will throw a
-     `UserNotFoundException`
+Accepts a username and returns the corresponding UserModel. 
+If the given username is not found, will throw a 
+`UserNotFoundException`. If the given email does not match the username, 
+with throw `InvalidAttributeValueException`.
 
 ![Create_Celestial_Body_Sequence_Diagram](images/aether_ark_images/uml/get_user_SD.png)
 
