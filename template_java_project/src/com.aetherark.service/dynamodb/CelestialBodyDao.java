@@ -1,11 +1,13 @@
 package com.aetherark.service.dynamodb;
 
 import com.aetherark.service.dynamodb.models.CelestialBody;
+import com.aetherark.service.exceptions.CelestialBodyNotFoundException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
-
+@Singleton
 public class CelestialBodyDao {
     private final DynamoDBMapper dynamoDbMapper;
 
@@ -23,15 +25,14 @@ public class CelestialBodyDao {
      * Returns the {@link CelestialBody} corresponding to the provided id.
      *
      * @param id the CelestialBody ID
-     * @return the Celestial Body, or null if none is found
+     * @return the Celestial Body, or throws {@link CelestialBodyNotFoundException} if given id is not found
      */
     public CelestialBody getCelestialBody(String id) {
         CelestialBody body = this.dynamoDbMapper.load(CelestialBody.class, id);
 
-        //TODO: Implement exceptions/errors
-//        if (body == null) {
-//
-//        }
+        if (body == null) {
+            throw new CelestialBodyNotFoundException("Could not find planet with id " + id);
+        }
 
         return body;
     }
@@ -46,6 +47,4 @@ public class CelestialBodyDao {
         dynamoDbMapper.save(body);
         return body;
     }
-
-
 }
