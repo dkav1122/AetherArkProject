@@ -7,10 +7,7 @@ public class CreateSolarSystemRequest {
     private String username;
     private String systemName;
 
-    public CreateSolarSystemRequest(String username, String systemName) {
-        this.username = username;
-        this.systemName = systemName;
-    }
+
 
     public CreateSolarSystemRequest() {
     }

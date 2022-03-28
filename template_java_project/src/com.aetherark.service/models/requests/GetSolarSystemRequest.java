@@ -6,10 +6,7 @@ public class GetSolarSystemRequest {
     private String username;
     private String systemId;
 
-    public GetSolarSystemRequest(String username, String systemId) {
-        this.username = username;
-        this.systemId = systemId;
-    }
+
 
     public GetSolarSystemRequest() {
     }
