@@ -67,11 +67,9 @@ public class CelestialBodyDao {
      * @param solarSystem the Solar System that now contains the Celestial Body
      * @return the updated Celestial Body object
      */
-    public CelestialBody addToBodyMemberSolarSystems(String bodyId, SolarSystem solarSystem) {
+    public CelestialBody addCelestialBodyToSolarSystem(String bodyId, SolarSystem solarSystem) {
         CelestialBody body = getCelestialBody(bodyId);
-        List<SolarSystem> solarSystemList = body.getMemberSolarSystems();
-        solarSystemList.add(solarSystem);
-        body.setMemberSolarSystems(solarSystemList);
+        body.getMemberSolarSystems().add(solarSystem);
         return saveCelestialBody(body);
     }
 
@@ -82,12 +80,23 @@ public class CelestialBodyDao {
      * @param solarSystem the Solar System that no longer contains the Celestial Body
      * @return the updated Celestial Body object
      */
-    public CelestialBody removeFromBodyMemberSolarSystems(String bodyId, SolarSystem solarSystem) {
+    public CelestialBody removeCelestialBodyFromSolarSystem(String bodyId, SolarSystem solarSystem) {
         CelestialBody body = getCelestialBody(bodyId);
-        List<SolarSystem> solarSystemList = body.getMemberSolarSystems();
-        solarSystemList.remove(solarSystem);
-        body.setMemberSolarSystems(solarSystemList);
+        body.getMemberSolarSystems().remove(solarSystem);
         return saveCelestialBody(body);
+    }
+
+    /**
+     * Removes the provided {@link SolarSystem} from all Celestial Bodies that were its members.
+     *
+     * @param solarSystem the Solar System that was deleted and needs to be scrubbed from the Bodies
+     */
+    public void deleteSolarSystemFromAllCelestialBodies(SolarSystem solarSystem) {
+        List<CelestialBody> bodyList = solarSystem.getCelestialBodies();
+        for (CelestialBody body : bodyList) {
+            body.getMemberSolarSystems().remove(solarSystem);
+            saveCelestialBody(body);
+        }
     }
 
     /**

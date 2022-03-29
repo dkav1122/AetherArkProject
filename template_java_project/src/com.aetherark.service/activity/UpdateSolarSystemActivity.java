@@ -101,7 +101,7 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
             solarSystem.getCelestialBodies().add(celestialBodyToAdd);
             solarSystem.getDistanceFromCenter().put(celestialBodyToAdd.getId(), defaultDistance);
 
-            celestialBodyDao.addToBodyMemberSolarSystems(celestialBodyToAdd.getId(), solarSystem);
+            celestialBodyDao.addCelestialBodyToSolarSystem(celestialBodyToAdd.getId(), solarSystem);
         }
 
         //remove body block
@@ -119,7 +119,7 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
             solarSystem.getCelestialBodies().remove(celestialBodyToRemove);
             solarSystem.getDistanceFromCenter().remove(celestialBodyToRemove.getId());
 
-            celestialBodyDao.removeFromBodyMemberSolarSystems(celestialBodyToRemove.getId(), solarSystem);
+            celestialBodyDao.removeCelestialBodyFromSolarSystem(celestialBodyToRemove.getId(), solarSystem);
         }
 
         //at this point- updated distance, added cbody, removed cbody, updated name,
