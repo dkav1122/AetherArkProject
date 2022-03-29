@@ -29,7 +29,7 @@ public class SolarSystem {
     public SolarSystem() {
     }
 
-    @DynamoDBHashKey(attributeName = "systemId")
+    @DynamoDBHashKey(attributeName = "solarSystemId")
     public String getSystemId() {
         return systemId;
     }

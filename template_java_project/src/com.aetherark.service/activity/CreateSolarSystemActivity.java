@@ -56,9 +56,10 @@ public class CreateSolarSystemActivity implements RequestHandler<CreateSolarSyst
         Map<String, Integer> distances = new HashMap<>();
         solarSystem.setDistanceFromCenter(distances);
 
-        /*
-        userDao.addToUserSolarSystemIds(solarSystem.getUsername(), solarSystem.getSystemId());
-        */
+
+
+        userDao.addToUserSolarSystemId(solarSystem.getUsername(), solarSystem.getSystemId());
+
 
         SolarSystemModel solarSystemModel = new ModelConverter().toSolarSystemModel(solarSystem);
 
