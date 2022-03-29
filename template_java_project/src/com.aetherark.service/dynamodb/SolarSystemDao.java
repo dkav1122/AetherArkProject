@@ -1,5 +1,6 @@
 package com.aetherark.service.dynamodb;
 
+import com.aetherark.service.dynamodb.models.CelestialBody;
 import com.aetherark.service.dynamodb.models.SolarSystem;
 import com.aetherark.service.exceptions.SolarSystemNotFoundException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
@@ -44,4 +45,16 @@ public class SolarSystemDao {
         dynamoDBMapper.batchDelete(solarSystemId);
 
     }
+
+    public void deleteCelestialBodyFromAllSolarSystems(CelestialBody celestialBody) {
+        List<SolarSystem> solarSystems = celestialBody.getMemberSolarSystems();
+
+        for(SolarSystem system : solarSystems) {
+            system.getCelestialBodies().remove(celestialBody);
+            system.getDistanceFromCenter().remove(celestialBody.getId());
+            saveSolarSystem(system);
+        }
+    }
+
+
 }
