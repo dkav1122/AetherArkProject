@@ -2,7 +2,7 @@ Resources:
   CelestialBodiesTable:
     Type: AWS::DynamodB::Table
     Properties:
-      TableName: CelestialBodies
+      TableName: "CelestialBodies"
       AttributeDefinitions:
         - AttributeName: "celestialBodyId"
           AttributeType: "S"

@@ -120,4 +120,12 @@ public class UserDao {
 
         return CelestialBodyId;
     }
+
+    public boolean usernameAlreadyExists(String username){
+        User user = dynamoDBMapper.load(User.class, username);
+        if (user != null){
+            return true;
+        }
+        return false;
+    }
 }

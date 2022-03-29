@@ -15,13 +15,13 @@ public interface ServiceComponent {
     UpdateSolarSystemActivity provideUpdateSolarSystemActivity();
     DeleteSolarSystemActivity provideDeleteSolarSystemActivity();
 
-//    CreateUserActivity provideCreateUserActivity();
+    CreateUserActivity provideCreateUserActivity();
     GetUserActivity provideGetUserActivity();
 //    UpdateUserActivity provideUpdateUserActivity();
 //    DeleteUserActivity provideDeleteUserActivity();
 
 //    CreateCelestialBodyActivity provideCreateCelestialBodyActivity();
-//    GetCelestialBodyActivity provideGetCelestialBodyActivity();
+    GetCelestialBodyActivity provideGetCelestialBodyActivity();
 //    UpdateCelestialBodyActivity provideUpdateCelestialBodyActivity();
 //    DeleteCelestialBodyActivity provideDeleteCelestialBodyActivity();
 
@@ -29,7 +29,5 @@ public interface ServiceComponent {
 //    DeleteAllSolarSystemsActivity provideDeleteAllSolarSystemsActivity();
 //    GetAllCelestialBodiesActivity provideGetAllCelestialBodiesActivity();
 //    DeleteAllCelestialBodiesActivity provideDeleteAllCelestialBodiesActivity();
-
-
 
 }

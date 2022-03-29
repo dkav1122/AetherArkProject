@@ -1,5 +1,6 @@
 package com.aetherark.service.lambda;
 
+import com.aetherark.service.dependency.DaggerServiceComponent;
 import com.aetherark.service.dependency.ServiceComponent;
 import com.aetherark.service.models.requests.GetCelestialBodyRequest;
 import com.aetherark.service.models.results.GetCelestialBodyResult;
