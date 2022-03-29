@@ -1,12 +1,6 @@
 package com.aetherark.service.dependency;
 
-import com.aetherark.service.activity.CreateSolarSystemActivity;
-import com.aetherark.service.activity.GetSolarSystemActivity;
-
-import com.aetherark.service.activity.UpdateSolarSystemActivity;
-
-import com.aetherark.service.activity.GetUserActivity;
-
+import com.aetherark.service.activity.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -19,7 +13,7 @@ public interface ServiceComponent {
     CreateSolarSystemActivity provideCreateSolarSystemActivity();
     GetSolarSystemActivity provideGetSolarSystemActivity();
     UpdateSolarSystemActivity provideUpdateSolarSystemActivity();
-//    DeleteSolarSystemActivity provideDeleteSolarSystemActivity();
+    DeleteSolarSystemActivity provideDeleteSolarSystemActivity();
 
 //    CreateUserActivity provideCreateUserActivity();
     GetUserActivity provideGetUserActivity();
