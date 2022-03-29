@@ -17,13 +17,16 @@ public interface ServiceComponent {
 
     CreateUserActivity provideCreateUserActivity();
     GetUserActivity provideGetUserActivity();
-//    UpdateUserActivity provideUpdateUserActivity();
+    UpdateUserActivity provideUpdateUserActivity();
 //    DeleteUserActivity provideDeleteUserActivity();
 
-//    CreateCelestialBodyActivity provideCreateCelestialBodyActivity();
+
+    CreateCelestialBodyActivity provideCreateCelestialBodyActivity();
     GetCelestialBodyActivity provideGetCelestialBodyActivity();
 //    UpdateCelestialBodyActivity provideUpdateCelestialBodyActivity();
 //    DeleteCelestialBodyActivity provideDeleteCelestialBodyActivity();
+
+
 
 //    GetAllSolarSystemsActivity provideGetAllSolarSystemsActivity();
 //    DeleteAllSolarSystemsActivity provideDeleteAllSolarSystemsActivity();
