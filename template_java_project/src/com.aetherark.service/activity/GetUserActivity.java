@@ -47,18 +47,18 @@ import javax.inject.Inject;
             throws UserNotFoundException {
         log.info("Received GetUserRequest {}", getUserRequest);
 
-        String requestedUsername = getUserRequest.getUsername();
-        String requestedEmail = getUserRequest.getEmail();
+        String requestUsername = getUserRequest.getUsername();
+        String requestEmail = getUserRequest.getEmail();
 
         User user;
         try {
-            user = userDao.getUser(requestedUsername);
+            user = userDao.getUser(requestUsername);
         } catch (UserNotFoundException e) {
-            throw new UserNotFoundException("Fetching " + e.getMessage());
+            throw new UserNotFoundException("Sign in " + e.getMessage());
         }
 
         //Security Check emails must match
-        if (!requestedEmail.equals(user.getEmail())){
+        if (!requestEmail.equals(user.getEmail())){
             throw new InvalidAttributeValueException("You didn't say the magic word!");
         }
 
