@@ -18,7 +18,7 @@ public class CelestialBody {
     private String composition;
     private List<SolarSystem> memberSolarSystems;
 
-    @DynamoDBHashKey(attributeName = "id")
+    @DynamoDBHashKey(attributeName = "celestialBodyId")
     public String getId() {
         return id;
     }
