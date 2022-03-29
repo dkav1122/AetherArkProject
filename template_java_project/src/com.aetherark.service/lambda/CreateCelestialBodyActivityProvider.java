@@ -32,12 +32,4 @@ public class CreateCelestialBodyActivityProvider
 
         return serviceComponent;
     }
-
-
-
-
-
-
-
-
 }

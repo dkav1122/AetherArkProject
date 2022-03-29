@@ -33,28 +33,28 @@ public class CreateCelestialBodyActivity
 
     @Override
     public CreateCelestialBodyResult handleRequest(
-            final CreateCelestialBodyRequest createCelestialBodyRequest, Context context) {
+            final CreateCelestialBodyRequest createBodyRequest, Context context) {
 
 //        TODO: add logging?
 
         try {
-            User user = userDao.getUser(createCelestialBodyRequest.getUsername());
+            User user = userDao.getUser(createBodyRequest.getUsername());
         } catch (UserNotFoundException exception) {
             throw new UserNotFoundException(exception.getMessage());
         }
 
-        if (!AetherArkServiceUtils.isValidString(createCelestialBodyRequest.getName())) {
+        if (!AetherArkServiceUtils.isValidString(createBodyRequest.getName())) {
             throw new InvalidAttributeException(String.format(
-                    "The provided name: %s contains invalid characters", createCelestialBodyRequest.getName()));
+                    "The provided name: %s contains invalid characters", createBodyRequest.getName()));
         }
 
         CelestialBody newCelestialBody = new CelestialBody();
         newCelestialBody.setId(AetherArkServiceUtils.generateId()); // is ID definitely unique?
-        newCelestialBody.setName(createCelestialBodyRequest.getName());
-        newCelestialBody.setUsername(createCelestialBodyRequest.getUsername());
-        newCelestialBody.setDiameter(createCelestialBodyRequest.getDiameter());
-        newCelestialBody.setMass(createCelestialBodyRequest.getMass());
-        newCelestialBody.setComposition(createCelestialBodyRequest.getComposition());
+        newCelestialBody.setName(createBodyRequest.getName());
+        newCelestialBody.setUsername(createBodyRequest.getUsername());
+        newCelestialBody.setDiameter(createBodyRequest.getDiameter());
+        newCelestialBody.setMass(createBodyRequest.getMass());
+        newCelestialBody.setComposition(createBodyRequest.getComposition());
         // Not a member of any SolarSystems
         newCelestialBody.setMemberSolarSystems(new ArrayList<>());
 

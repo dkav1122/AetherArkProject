@@ -52,7 +52,7 @@ public class GetCelestialBodyActivity implements RequestHandler<GetCelestialBody
             throw new CelestialBodyNotFoundException("This celestial body is owned by a different user");
         }
 
-        CelestialBodyModel celestialBodyModel = new ModelConverter().toCelestialBodyModel((celestialBody));
+        CelestialBodyModel celestialBodyModel = new ModelConverter().toCelestialBodyModel(celestialBody);
 
         return GetCelestialBodyResult.builder()
                 .withCelestialBody(celestialBodyModel)
