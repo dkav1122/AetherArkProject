@@ -16,7 +16,7 @@ public class User {
     private String email;
     private List<String> solarSystemIds;
     private List<String> celestialBodyIds;
-    private static final String NAME = "name";
+    private static final String NAME = "username";
     private static final String EMAIL = "email";
     private static final String SOLAR_SYSTEM_IDS = "solarSystemIds";
     private static final String CELESTIAL_BODY_IDS = "celestialBodyIds";

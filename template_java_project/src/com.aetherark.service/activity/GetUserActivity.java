@@ -50,8 +50,14 @@ import javax.inject.Inject;
         String requestedUsername = getUserRequest.getUsername();
         String requestedEmail = getUserRequest.getEmail();
 
-        User user = userDao.getUser(requestedUsername);
+        User user;
+        try {
+            user = userDao.getUser(requestedUsername);
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException("Fetching " + e.getMessage());
+        }
 
+        //Security Check emails must match
         if (!requestedEmail.equals(user.getEmail())){
             throw new InvalidAttributeValueException("You didn't say the magic word!");
         }

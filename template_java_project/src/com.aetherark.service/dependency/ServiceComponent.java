@@ -1,12 +1,6 @@
 package com.aetherark.service.dependency;
 
-import com.aetherark.service.activity.CreateSolarSystemActivity;
-import com.aetherark.service.activity.GetSolarSystemActivity;
-
-import com.aetherark.service.activity.UpdateSolarSystemActivity;
-
-import com.aetherark.service.activity.GetUserActivity;
-
+import com.aetherark.service.activity.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -19,23 +13,24 @@ public interface ServiceComponent {
     CreateSolarSystemActivity provideCreateSolarSystemActivity();
     GetSolarSystemActivity provideGetSolarSystemActivity();
     UpdateSolarSystemActivity provideUpdateSolarSystemActivity();
-//    DeleteSolarSystemActivity provideDeleteSolarSystemActivity();
+    DeleteSolarSystemActivity provideDeleteSolarSystemActivity();
 
-//    CreateUserActivity provideCreateUserActivity();
+    CreateUserActivity provideCreateUserActivity();
     GetUserActivity provideGetUserActivity();
-//    UpdateUserActivity provideUpdateUserActivity();
+    UpdateUserActivity provideUpdateUserActivity();
 //    DeleteUserActivity provideDeleteUserActivity();
 
-//    CreateCelestialBodyActivity provideCreateCelestialBodyActivity();
-//    GetCelestialBodyActivity provideGetCelestialBodyActivity();
+
+    CreateCelestialBodyActivity provideCreateCelestialBodyActivity();
+    GetCelestialBodyActivity provideGetCelestialBodyActivity();
 //    UpdateCelestialBodyActivity provideUpdateCelestialBodyActivity();
 //    DeleteCelestialBodyActivity provideDeleteCelestialBodyActivity();
+
+
 
 //    GetAllSolarSystemsActivity provideGetAllSolarSystemsActivity();
 //    DeleteAllSolarSystemsActivity provideDeleteAllSolarSystemsActivity();
 //    GetAllCelestialBodiesActivity provideGetAllCelestialBodiesActivity();
 //    DeleteAllCelestialBodiesActivity provideDeleteAllCelestialBodiesActivity();
-
-
 
 }

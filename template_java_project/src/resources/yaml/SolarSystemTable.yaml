@@ -2,7 +2,7 @@ Resources:
   SolarSystemsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: SolarSystems
+      TableName: "SolarSystems"
       AttributeDefinitions:
         - AttributeName: "solarSystemId"
           AttributeType: "S"

@@ -2,7 +2,7 @@ Resources:
   UsersTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: Users
+      TableName: "Users"
       AttributeDefinitions:
         - AttributeName: "username"
           AttributeType: "S"
