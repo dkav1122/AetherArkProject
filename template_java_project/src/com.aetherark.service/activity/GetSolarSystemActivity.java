@@ -14,6 +14,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GetSolarSystemActivity implements RequestHandler<GetSolarSystemRequest, GetSolarSystemResult> {
     private final SolarSystemDao solarSystemDao;
@@ -32,26 +34,53 @@ public class GetSolarSystemActivity implements RequestHandler<GetSolarSystemRequ
         User user;
         SolarSystem solarSystem;
 
+
         try {
-           user = userDao.getUser(getSolarSystemRequest.getUsername());
-           solarSystem = solarSystemDao.getSolarSystem(getSolarSystemRequest.getSystemId());
+            user = userDao.getUser(getSolarSystemRequest.getUsername());
         } catch (UserNotFoundException e) {
             throw new UserNotFoundException(e);
-        } catch (SolarSystemNotFoundException e) {
-            throw new SolarSystemNotFoundException(e);
-        }
-
-        if(!solarSystem.getUsername().equals(user.getName())) {
-            //todo throw security/system ownership exception exception
-            throw new UserNotFoundException("This solar system is owned by a different user");
         }
 
         ModelConverter modelConverter = new ModelConverter();
-        SolarSystemModel solarSystemModel = modelConverter.toSolarSystemModel(solarSystem);
 
-        return GetSolarSystemResult.builder().
-                withSolarSystemModel(solarSystemModel)
-                .build();
+        //GSI BLOCK
+        if (getSolarSystemRequest.isGetAll()) {
+            // do stuff
+            List<SolarSystem> solarSystems = new ArrayList<>();
+            solarSystems = solarSystemDao.getAllSolarSystemsForUser(user.getName());
+
+
+            List<SolarSystemModel> solarSystemModels = new ArrayList<>();
+
+
+            for (SolarSystem system : solarSystems) {
+                SolarSystemModel model = modelConverter.toSolarSystemModel(system);
+                solarSystemModels.add(model);
+            }
+
+
+            return GetSolarSystemResult.builder().withSolarSystemModels(solarSystemModels).build();
+        } else {
+
+
+            try {
+                solarSystem = solarSystemDao.getSolarSystem(getSolarSystemRequest.getSystemId());
+            } catch (SolarSystemNotFoundException e) {
+                throw new SolarSystemNotFoundException(e);
+            }
+
+            if (!solarSystem.getUsername().equals(user.getName())) {
+                //todo throw security/system ownership exception exception
+                throw new UserNotFoundException("This solar system is owned by a different user");
+            }
+
+
+            SolarSystemModel solarSystemModel = modelConverter.toSolarSystemModel(solarSystem);
+
+            return GetSolarSystemResult.builder().
+                    withSolarSystemModel(solarSystemModel)
+                    .build();
+        }
     }
 
 

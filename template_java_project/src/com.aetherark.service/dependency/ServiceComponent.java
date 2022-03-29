@@ -23,6 +23,6 @@ public interface ServiceComponent {
     CreateCelestialBodyActivity provideCreateCelestialBodyActivity();
     GetCelestialBodyActivity provideGetCelestialBodyActivity();
 //    UpdateCelestialBodyActivity provideUpdateCelestialBodyActivity();
-//    DeleteCelestialBodyActivity provideDeleteCelestialBodyActivity();
+    DeleteCelestialBodyActivity provideDeleteCelestialBodyActivity();
 
 }

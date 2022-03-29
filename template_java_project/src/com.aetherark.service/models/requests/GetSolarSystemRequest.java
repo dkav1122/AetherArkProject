@@ -5,6 +5,7 @@ import java.util.Objects;
 public class GetSolarSystemRequest {
     private String username;
     private String systemId;
+    private boolean getAll;
 
 
 
@@ -14,6 +15,7 @@ public class GetSolarSystemRequest {
     public GetSolarSystemRequest(Builder builder) {
         this.username = builder.username;
         this.systemId = builder.systemId;
+        this.getAll = builder.getAll;
 
     }
 
@@ -33,17 +35,25 @@ public class GetSolarSystemRequest {
         this.systemId = systemId;
     }
 
+    public boolean isGetAll() {
+        return getAll;
+    }
+
+    public void setGetAll(boolean getAll) {
+        this.getAll = getAll;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GetSolarSystemRequest that = (GetSolarSystemRequest) o;
-        return getUsername().equals(that.getUsername()) && getSystemId().equals(that.getSystemId());
+        return isGetAll() == that.isGetAll() && getUsername().equals(that.getUsername()) && getSystemId().equals(that.getSystemId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUsername(), getSystemId());
+        return Objects.hash(getUsername(), getSystemId(), isGetAll());
     }
 
     @Override
@@ -51,6 +61,7 @@ public class GetSolarSystemRequest {
         return "GetSolarSystemRequest{" +
                 "username='" + username + '\'' +
                 ", systemId='" + systemId + '\'' +
+                ", getAll=" + getAll +
                 '}';
     }
 
@@ -61,6 +72,7 @@ public class GetSolarSystemRequest {
     public static final class Builder {
         private String username;
         private String systemId;
+        private boolean getAll;
 
 
         private Builder() {
@@ -74,6 +86,11 @@ public class GetSolarSystemRequest {
 
         public Builder withSystemId(String systemIdToUse) {
             this.systemId = systemIdToUse;
+            return this;
+        }
+
+        public Builder withGetAll(boolean getAll) {
+            this.getAll = getAll;
             return this;
         }
 

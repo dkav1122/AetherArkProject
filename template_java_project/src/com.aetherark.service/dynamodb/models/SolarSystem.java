@@ -3,6 +3,7 @@ package com.aetherark.service.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Objects;
 @DynamoDBTable(tableName = "SolarSystems")
 public class SolarSystem {
 
+    public static final String USERNAME_INDEX = "GetAllSolarSystemsForUser";
     private String systemId;
     private String systemName;
     private List<CelestialBody> celestialBodies;
@@ -65,6 +67,7 @@ public class SolarSystem {
         this.distanceFromCenter = distanceFromCenter;
     }
 
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = USERNAME_INDEX, attributeName = "username")
     public String getUsername() {
         return username;
     }
