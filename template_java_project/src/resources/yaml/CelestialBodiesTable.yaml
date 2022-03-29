@@ -1,6 +1,6 @@
 Resources:
   CelestialBodiesTable:
-    Type: AWS::DynamodB::Table
+    Type: AWS::DynamoDB::Table
     Properties:
       TableName: "CelestialBodies"
       AttributeDefinitions:
@@ -8,5 +8,5 @@ Resources:
           AttributeType: "S"
       KeySchema:
         - AttributeName: "celestialBodyId"
-          AttributeType: "S"
+          KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
