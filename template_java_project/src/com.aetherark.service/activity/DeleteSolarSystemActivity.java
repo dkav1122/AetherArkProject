@@ -51,8 +51,8 @@ public class DeleteSolarSystemActivity implements RequestHandler<DeleteSolarSyst
                     " because it isn't theirs");
         }
 
-        //TODO
-      //  celestialBodyDao.deleteSolarSystemFromAllCelestialBodies(solarSystem);
+
+        celestialBodyDao.deleteSolarSystemFromAllCelestialBodies(solarSystem);
         userDao.removeFromUserSolarSystemId(user.getName(), solarSystem.getSystemId());
         solarSystemDao.deleteSolarSystem(solarSystem);
 

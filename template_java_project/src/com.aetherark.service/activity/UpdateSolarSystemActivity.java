@@ -125,6 +125,7 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
         //at this point- updated distance, added cbody, removed cbody, updated name,
 
        solarSystemDao.saveSolarSystem(solarSystem);
+       celestialBodyDao.updateSolarSystemInCelestialBodies(solarSystem);
 
        SolarSystemModel solarSystemModel = new ModelConverter().toSolarSystemModel(solarSystem);
 
