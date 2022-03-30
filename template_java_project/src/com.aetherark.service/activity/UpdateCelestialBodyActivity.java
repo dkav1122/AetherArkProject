@@ -53,6 +53,9 @@ public class UpdateCelestialBodyActivity
         }
 
 
+        //Keep this for reference later
+        CelestialBody bodyToRemove = celestialBodyDao.getCelestialBody(updateBodyRequest.getCelestialBodyId());
+
         // add all the request data to the bodytochange object
         bodyToChange.setName(updateBodyRequest.getName());
         bodyToChange.setDiameter(updateBodyRequest.getDiameter());
@@ -65,8 +68,8 @@ public class UpdateCelestialBodyActivity
         List<SolarSystem> memberSystems = bodyToChange.getMemberSolarSystems();
         for (SolarSystem system : memberSystems) {
             List<CelestialBody> systemBodies = system.getCelestialBodies();
-            int index = systemBodies.indexOf(bodyToChange);
-            systemBodies.remove(bodyToChange);
+            int index = systemBodies.indexOf(bodyToRemove);
+            systemBodies.remove(index);
             systemBodies.add(index, bodyToChange);
             system.setCelestialBodies(systemBodies);
             solarSystemDao.saveSolarSystem(system);
