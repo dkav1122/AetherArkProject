@@ -52,6 +52,7 @@ public class UpdateCelestialBodyActivity
                     "This celestial body does not belong to this user: %s", updateBodyRequest.getUsername()));
         }
 
+
         //Keep this for reference later
         CelestialBody bodyToRemove = celestialBodyDao.getCelestialBody(updateBodyRequest.getCelestialBodyId());
 

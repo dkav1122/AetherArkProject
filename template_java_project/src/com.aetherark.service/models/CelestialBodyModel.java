@@ -11,7 +11,7 @@ public class CelestialBodyModel {
     private String name;
     private Integer diameter;
     private Integer mass;
-    private String composition;
+    private Composition composition;
     private List<SolarSystem> memberSolarSystems;
 
     public CelestialBodyModel() {
@@ -59,11 +59,11 @@ public class CelestialBodyModel {
         this.mass = mass;
     }
 
-    public String getComposition() {
+    public Composition getComposition() {
         return composition;
     }
 
-    public void setComposition(String composition) {
+    public void setComposition(Composition composition) {
         this.composition = composition;
     }
 
@@ -109,7 +109,7 @@ public class CelestialBodyModel {
         private String name;
         private Integer diameter;
         private Integer mass;
-        private String composition;
+        private Composition composition;
         private List<SolarSystem> memberSolarSystems;
 
         public Builder withId(String givenId) {
@@ -132,7 +132,7 @@ public class CelestialBodyModel {
             return this;
         }
 
-        public Builder withComposition(String givenComposition) {
+        public Builder withComposition(Composition givenComposition) {
             this.composition = givenComposition;
             return this;
         }
