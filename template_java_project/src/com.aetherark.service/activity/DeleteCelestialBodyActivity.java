@@ -49,8 +49,7 @@ public class DeleteCelestialBodyActivity
         }
 
         celestialBodyDao.deleteCelestialBody(bodyToDelete);
-//        TODO: Update the lists in all SolarSystems that had it
-//        deleteCelestialBodiesFromAllSolarSystems(bodyToDelete.getUsername());
+        solarSystemDao.deleteCelestialBodyFromAllSolarSystems(bodyToDelete);
         userDao.removeFromCelestialBodyId(deleteBodyRequest.getUsername(), deleteBodyRequest.getCelestialBodyId());
 
 

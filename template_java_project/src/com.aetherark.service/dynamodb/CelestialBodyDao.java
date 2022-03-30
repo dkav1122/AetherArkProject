@@ -100,6 +100,33 @@ public class CelestialBodyDao {
     }
 
     /**
+     * Updates all {@link CelestialBody} items with a newly updated {@link SolarSystem} object.
+     *
+     * @param solarSystem the Solar System that was updated and needs to be changed in the lists.
+     */
+    public void updateSolarSystemInCelestialBodies(SolarSystem solarSystem) {
+        List<CelestialBody> bodyList = solarSystem.getCelestialBodies();
+        String systemId = solarSystem.getSystemId();
+        for (CelestialBody body : bodyList) {
+            int index = -1;
+            List<SolarSystem> systemsList = body.getMemberSolarSystems();
+            for (int i = 0; i < systemsList.size(); i++) {
+                if (systemsList.get(i).getSystemId().equals(solarSystem.getSystemId())) {
+                    index = i;
+                    break;
+                }
+            }
+            systemsList.remove(index);
+            systemsList.add(index, solarSystem);
+            body.setMemberSolarSystems(systemsList);
+            saveCelestialBody(body);
+        }
+    }
+
+
+
+
+    /**
      * Deletes every {@link CelestialBody} with a provided id.
      *
      * @param bodyIds the List of ids to be deleted
