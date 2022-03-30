@@ -66,11 +66,11 @@ public class CelestialBody {
     }
 
     @DynamoDBAttribute(attributeName = "composition")
-    public String getComposition() {
+    public Composition getComposition() {
         return composition;
     }
 
-    public void setComposition(String composition) {
+    public void setComposition(Composition composition) {
         this.composition = composition;
     }
 

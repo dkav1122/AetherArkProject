@@ -1,5 +1,7 @@
 package com.aetherark.service.models.requests;
 
+import com.aetherark.service.models.Composition;
+
 import java.util.Objects;
 
 public class CreateCelestialBodyRequest {
@@ -7,7 +9,7 @@ public class CreateCelestialBodyRequest {
     private String name;
     private Integer diameter;
     private Integer mass;
-    private String composition;
+    private Composition composition;
 
     public CreateCelestialBodyRequest() {
 
@@ -53,11 +55,11 @@ public class CreateCelestialBodyRequest {
         this.mass = mass;
     }
 
-    public String getComposition() {
+    public Composition getComposition() {
         return composition;
     }
 
-    public void setComposition(String composition) {
+    public void setComposition(Composition composition) {
         this.composition = composition;
     }
 
@@ -97,7 +99,7 @@ public class CreateCelestialBodyRequest {
         private String name;
         private Integer diameter;
         private Integer mass;
-        private String composition;
+        private Composition composition;
 
         private Builder() {
 
@@ -123,7 +125,7 @@ public class CreateCelestialBodyRequest {
             return this;
         }
 
-        public Builder withComposition(String compositionToUse) {
+        public Builder withComposition(Composition compositionToUse) {
             this.composition = compositionToUse;
             return this;
         }
