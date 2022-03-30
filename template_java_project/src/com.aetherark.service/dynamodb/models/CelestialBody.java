@@ -4,6 +4,7 @@ import com.aetherark.service.models.Composition;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 
 import java.util.List;
 import java.util.Objects;
@@ -65,6 +66,7 @@ public class CelestialBody {
         this.mass = mass;
     }
 
+    @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "composition")
     public Composition getComposition() {
         return composition;
