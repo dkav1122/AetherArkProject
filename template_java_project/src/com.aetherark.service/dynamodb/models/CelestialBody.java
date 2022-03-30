@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-@DynamoDBTable(tableName = "celestial_bodies")
+@DynamoDBTable(tableName = "CelestialBodies")
 public class CelestialBody {
 
     private String id;
