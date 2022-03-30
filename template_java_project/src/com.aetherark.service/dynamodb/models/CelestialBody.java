@@ -1,10 +1,12 @@
 package com.aetherark.service.dynamodb.models;
 
+import com.aetherark.service.models.Composition;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @DynamoDBTable(tableName = "celestial_bodies")
@@ -15,7 +17,7 @@ public class CelestialBody {
     private String username;
     private Integer diameter;
     private Integer mass;
-    private String composition;
+    private Composition composition;
     private List<SolarSystem> memberSolarSystems;
 
     @DynamoDBHashKey(attributeName = "celestialBodyId")
@@ -79,5 +81,31 @@ public class CelestialBody {
 
     public void setMemberSolarSystems(List<SolarSystem> memberSolarSystems) {
         this.memberSolarSystems = memberSolarSystems;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CelestialBody that = (CelestialBody) o;
+        return id.equals(that.id) && username.equals(that.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username);
+    }
+
+    @Override
+    public String toString() {
+        return "CelestialBody{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", diameter=" + diameter +
+                ", mass=" + mass +
+                ", composition=" + composition +
+                ", memberSolarSystems=" + memberSolarSystems +
+                '}';
     }
 }

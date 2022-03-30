@@ -48,7 +48,6 @@ public class GetCelestialBodyActivity implements RequestHandler<GetCelestialBody
         }
 
         if (!celestialBody.getUsername().equals(user.getName())) {
-            //TODO: throw security exception
             throw new CelestialBodyNotFoundException("This celestial body is owned by a different user");
         }
 
