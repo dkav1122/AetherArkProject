@@ -25,7 +25,7 @@ public class ModelConverter {
                 .withDiameter(body.getDiameter())
                 .withMass(body.getMass())
                 .withComposition(body.getComposition())
-                .withSolarSystems(body.getMemberSolarSystems())
+                .withSolarSystems(body.getSolarSystemNames())
                 .build();
     }
 

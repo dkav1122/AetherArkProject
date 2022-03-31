@@ -18,6 +18,8 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Singleton
 public class CreateCelestialBodyActivity
@@ -56,7 +58,8 @@ public class CreateCelestialBodyActivity
         newCelestialBody.setMass(createBodyRequest.getMass());
         newCelestialBody.setComposition(createBodyRequest.getComposition());
         // Not a member of any SolarSystems
-        newCelestialBody.setMemberSolarSystems(new ArrayList<>());
+        Map<String, String> systemMap = new HashMap<>();
+        newCelestialBody.setSolarSystemNames(systemMap);
 
         celestialBodyDao.saveCelestialBody(newCelestialBody);
         userDao.addToUserCelestialBodyId(newCelestialBody.getUsername(), newCelestialBody.getId());

@@ -63,15 +63,19 @@ public class CelestialBodyDao {
     }
 
     /**
-     * Adds the provided {@link SolarSystem} to the list of SolarSystems of which this {@link CelestialBody} is a member.
+     * Adds the provided {@link SolarSystem} to the list of SolarSystems in this {@link CelestialBody} object.
      *
      * @param bodyId the ID of the Celestial Body which has been added to the Solar System
      * @param solarSystem the Solar System that now contains the Celestial Body
-     * @return the updated Celestial Body object
+     * @return the updated Celestial Body object that can now be saved to the {@link SolarSystem}
      */
-    public CelestialBody addCelestialBodyToSolarSystem(String bodyId, SolarSystem solarSystem) {
+    public CelestialBody addSolarSystemNameToCelestialBody(String bodyId, SolarSystem solarSystem) {
         CelestialBody body = getCelestialBody(bodyId);
-        body.getMemberSolarSystems().add(solarSystem);
+
+        Map<String, String> systemNames = body.getSolarSystemNames();
+        systemNames.put(solarSystem.getSystemId(), solarSystem.getSystemName());
+        body.setSolarSystemNames(systemNames);
+
         return saveCelestialBody(body);
     }
 
@@ -82,9 +86,13 @@ public class CelestialBodyDao {
      * @param solarSystem the Solar System that no longer contains the Celestial Body
      * @return the updated Celestial Body object
      */
-    public CelestialBody removeCelestialBodyFromSolarSystem(String bodyId, SolarSystem solarSystem) {
+    public CelestialBody removeSolarSystemNameFromCelestialBody(String bodyId, SolarSystem solarSystem) {
         CelestialBody body = getCelestialBody(bodyId);
-        body.getMemberSolarSystems().remove(solarSystem);
+
+        Map<String, String> systemNames = body.getSolarSystemNames();
+        systemNames.remove(solarSystem.getSystemId());
+        body.setSolarSystemNames(systemNames);
+
         return saveCelestialBody(body);
     }
 
@@ -96,34 +104,59 @@ public class CelestialBodyDao {
     public void deleteSolarSystemFromAllCelestialBodies(SolarSystem solarSystem) {
         List<CelestialBody> bodyList = solarSystem.getCelestialBodies();
         for (CelestialBody body : bodyList) {
-            body.getMemberSolarSystems().remove(solarSystem);
+            body.getSolarSystemNames().remove(solarSystem.getSystemId());
             saveCelestialBody(body);
         }
     }
 
     /**
+     * When a {@link SolarSystem} name has been changed, updates the name for all its {@link CelestialBody} members.
+     *
+     * @param solarSystem the Solar System that was updated with a new name
+     * @return the {@link List} of updated Celestial Bodies that should now be saved back into the {@link SolarSystem}
+     */
+    public List<CelestialBody> updateSolarSystemNameInCelestialBodies(SolarSystem solarSystem) {
+        List<CelestialBody> updatedBodies = new ArrayList<>();
+        List<CelestialBody> bodyList = solarSystem.getCelestialBodies();
+
+        for (CelestialBody body : bodyList) {
+            Map<String, String> systemNames = body.getSolarSystemNames();
+            systemNames.put(solarSystem.getSystemId(), solarSystem.getSystemName());
+            body.setSolarSystemNames(systemNames);
+            saveCelestialBody(body);
+            updatedBodies.add(body);
+        }
+
+        return updatedBodies;
+    }
+
+    /**
+     * @deprecated
      * Updates all {@link CelestialBody} items with a newly updated {@link SolarSystem} object.
      *
      * @param solarSystem the Solar System that was updated and needs to be changed in the lists.
      */
+    @Deprecated
     public void updateSolarSystemInCelestialBodies(SolarSystem solarSystem) {
         List<CelestialBody> bodyList = solarSystem.getCelestialBodies();
         String systemId = solarSystem.getSystemId();
         for (CelestialBody body : bodyList) {
             int index = -1;
-            List<SolarSystem> systemsList = body.getMemberSolarSystems();
+            List<SolarSystem> systemsList = new ArrayList<SolarSystem>();
             for (int i = 0; i < systemsList.size(); i++) {
                 if (systemsList.get(i).getSystemId().equals(solarSystem.getSystemId())) {
                     index = i;
-                    break;
                 }
             }
-            systemsList.remove(index);
-            systemsList.add(index, solarSystem);
-            body.setMemberSolarSystems(systemsList);
-            saveCelestialBody(body);
+            if (index != -1) {
+                systemsList.remove(index);
+                systemsList.add(index, solarSystem);
+//                body.setSolarSystemNames(systemsList);
+                saveCelestialBody(body);
+            }
         }
     }
+
     /**
      * Deletes every {@link CelestialBody} with a provided id.
      *
