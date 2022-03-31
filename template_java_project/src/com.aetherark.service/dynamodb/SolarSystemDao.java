@@ -43,10 +43,17 @@ public class SolarSystemDao {
         return solarSystem;
     }
 
-    public void deleteAllSolarSystemForUser(List<String> solarSystemId) {
-
-        dynamoDBMapper.batchDelete(solarSystemId);
-
+    public void deleteAllSolarSystemForUser(List<String> solarSystemIds) {
+        List<SolarSystem> solarSystemList = new ArrayList<>();
+        //iterate through the solarSystemIds
+        for (String systemId: solarSystemIds){
+            // set a system Id to a new system object
+            SolarSystem systemToGet = new SolarSystem();
+            systemToGet.setSystemId(systemId);
+            // Add to the list
+            solarSystemList.add(systemToGet);
+        }
+        dynamoDBMapper.batchDelete(solarSystemList);
     }
 
     public void deleteCelestialBodyFromAllSolarSystems(CelestialBody celestialBody) {
@@ -72,6 +79,4 @@ public class SolarSystemDao {
         return new ArrayList<>(dynamoDBMapper.query(SolarSystem.class, queryExpression));
 
     }
-
-
 }
