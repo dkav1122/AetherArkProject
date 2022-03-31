@@ -1,0 +1,38 @@
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th {
+  background: #99ccff;
+}
+
+th, td {
+  padding: 6px;
+}
+
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(3, 0, 0);
+}
+
+.login-card {
+  text-align: center;
+  width: 200px;
+  padding: 32px;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(249, 246, 246, 0.434), 0 6px 20px 0 hsla(0, 96%, 44%, 0.19);
+  border-radius: 20px;
+}
+
+
+.userbutton {
+  margin: 10px;
+}
+
+
