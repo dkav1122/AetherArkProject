@@ -48,7 +48,6 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
         CelestialBody celestialBodyToRemove;
         int defaultDistance = 10;
 
-
         try {
             user = userDao.getUser(updateSolarSystemRequest.getUsername());
             solarSystem = solarSystemDao.getSolarSystem(updateSolarSystemRequest.getSolarSystemId());
