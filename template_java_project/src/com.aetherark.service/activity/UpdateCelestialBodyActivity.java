@@ -6,7 +6,6 @@ import com.aetherark.service.dynamodb.SolarSystemDao;
 import com.aetherark.service.dynamodb.UserDao;
 import com.aetherark.service.dynamodb.models.CelestialBody;
 import com.aetherark.service.dynamodb.models.SolarSystem;
-import com.aetherark.service.dynamodb.models.User;
 import com.aetherark.service.exceptions.CelestialBodyNotFoundException;
 import com.aetherark.service.exceptions.InvalidAttributeException;
 import com.aetherark.service.models.CelestialBodyModel;
@@ -18,6 +17,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
+import java.util.Map;
 
 @Singleton
 public class UpdateCelestialBodyActivity
@@ -38,7 +38,6 @@ public class UpdateCelestialBodyActivity
     public UpdateCelestialBodyResult handleRequest(
             final UpdateCelestialBodyRequest updateBodyRequest, Context context) {
 
-        // get celestialbody to change
         CelestialBody bodyToChange;
         try {
             bodyToChange = celestialBodyDao.getCelestialBody(updateBodyRequest.getCelestialBodyId());
@@ -46,7 +45,6 @@ public class UpdateCelestialBodyActivity
             throw new CelestialBodyNotFoundException(exception.getMessage());
         }
 
-        // security check the username
         if (!bodyToChange.getUsername().equals(updateBodyRequest.getUsername())) {
             throw new InvalidAttributeException(String.format(
                     "This celestial body does not belong to this user: %s", updateBodyRequest.getUsername()));
@@ -56,17 +54,16 @@ public class UpdateCelestialBodyActivity
         //Keep this for reference later
         CelestialBody bodyToRemove = celestialBodyDao.getCelestialBody(updateBodyRequest.getCelestialBodyId());
 
-        // add all the request data to the bodytochange object
         bodyToChange.setName(updateBodyRequest.getName());
         bodyToChange.setDiameter(updateBodyRequest.getDiameter());
         bodyToChange.setMass(updateBodyRequest.getMass());
         bodyToChange.setComposition(updateBodyRequest.getComposition());
-
-        // save that object with whatever was changed or not. No need to check
         celestialBodyDao.saveCelestialBody(bodyToChange);
-        // ALSO save that newly edited CelestialBody to all SolarSystems as well.
-        List<SolarSystem> memberSystems = bodyToChange.getMemberSolarSystems();
-        for (SolarSystem system : memberSystems) {
+
+        // Also save that newly edited CelestialBody to all SolarSystems as well.
+        Map<String, String> solarSystems = bodyToChange.getSolarSystemNames();
+        for (String systemId : solarSystems.keySet()) {
+            SolarSystem system = solarSystemDao.getSolarSystem(systemId);
             List<CelestialBody> systemBodies = system.getCelestialBodies();
             int index = systemBodies.indexOf(bodyToRemove);
             systemBodies.remove(index);
@@ -75,7 +72,6 @@ public class UpdateCelestialBodyActivity
             solarSystemDao.saveSolarSystem(system);
         }
 
-        // make the model to return the result
         CelestialBodyModel celestialBodyModel = new ModelConverter().toCelestialBodyModel(bodyToChange);
 
         return UpdateCelestialBodyResult.builder()

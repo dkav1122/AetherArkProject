@@ -9,6 +9,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SolarSystemDao {
 
@@ -49,9 +50,10 @@ public class SolarSystemDao {
     }
 
     public void deleteCelestialBodyFromAllSolarSystems(CelestialBody celestialBody) {
-        List<SolarSystem> solarSystems = celestialBody.getMemberSolarSystems();
+        Map<String, String> solarSystems = celestialBody.getSolarSystemNames();
 
-        for(SolarSystem system : solarSystems) {
+        for (String systemId : solarSystems.keySet()) {
+            SolarSystem system = getSolarSystem(systemId);
             system.getCelestialBodies().remove(celestialBody);
             system.getDistanceFromCenter().remove(celestialBody.getId());
             saveSolarSystem(system);

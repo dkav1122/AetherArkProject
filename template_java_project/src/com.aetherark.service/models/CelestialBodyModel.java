@@ -4,6 +4,7 @@ import com.aetherark.service.dynamodb.models.SolarSystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class CelestialBodyModel {
@@ -12,7 +13,9 @@ public class CelestialBodyModel {
     private Integer diameter;
     private Integer mass;
     private Composition composition;
-    private List<SolarSystem> memberSolarSystems;
+    private Map<String, String> solarSystemNames;
+
+//    private List<SolarSystem> memberSolarSystems;
 
     public CelestialBodyModel() {
 
@@ -24,7 +27,7 @@ public class CelestialBodyModel {
         this.diameter = builder.diameter;
         this.mass = builder.mass;
         this.composition = builder.composition;
-        this.memberSolarSystems = builder.memberSolarSystems;
+        this.solarSystemNames = builder.solarSystemNames;
     }
 
     public String getBodyId() {
@@ -67,12 +70,12 @@ public class CelestialBodyModel {
         this.composition = composition;
     }
 
-    public List<SolarSystem> getMemberSolarSystems() {
-        return memberSolarSystems;
+    public Map<String, String> getSolarSystemNames() {
+        return solarSystemNames;
     }
 
-    public void setMemberSolarSystems(List<SolarSystem> memberSolarSystems) {
-        this.memberSolarSystems = memberSolarSystems;
+    public void setSolarSystemNames(Map<String, String> solarSystemNames) {
+        this.solarSystemNames = solarSystemNames;
     }
 
     @Override
@@ -96,7 +99,7 @@ public class CelestialBodyModel {
                 ", diameter=" + diameter +
                 ", mass=" + mass +
                 ", composition='" + composition + '\'' +
-                ", memberSolarSystems=" + memberSolarSystems +
+                ", memberSolarSystems=" + solarSystemNames +
                 '}';
     }
 
@@ -110,7 +113,7 @@ public class CelestialBodyModel {
         private Integer diameter;
         private Integer mass;
         private Composition composition;
-        private List<SolarSystem> memberSolarSystems;
+        private Map<String, String> solarSystemNames;
 
         public Builder withId(String givenId) {
             this.id = givenId;
@@ -137,12 +140,8 @@ public class CelestialBodyModel {
             return this;
         }
 
-        public Builder withSolarSystems(List<SolarSystem> givenSolarSystems) {
-            if (givenSolarSystems == null || givenSolarSystems.isEmpty()) {
-                this.memberSolarSystems = null;
-            } else {
-                this.memberSolarSystems = new ArrayList<>(givenSolarSystems);
-            }
+        public Builder withSolarSystems(Map<String, String> givenSolarSystems) {
+            this.solarSystemNames = givenSolarSystems;
             return this;
         }
 

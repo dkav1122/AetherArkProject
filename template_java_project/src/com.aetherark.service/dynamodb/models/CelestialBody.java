@@ -7,6 +7,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -19,7 +20,7 @@ public class CelestialBody {
     private Integer diameter;
     private Integer mass;
     private Composition composition;
-    private List<SolarSystem> memberSolarSystems;
+    private Map<String, String> solarSystemNames;
 
     @DynamoDBHashKey(attributeName = "celestialBodyId")
     public String getId() {
@@ -77,12 +78,12 @@ public class CelestialBody {
     }
 
     @DynamoDBAttribute(attributeName = "solar_systems")
-    public List<SolarSystem> getMemberSolarSystems() {
-        return memberSolarSystems;
+    public Map<String, String> getSolarSystemNames() {
+        return solarSystemNames;
     }
 
-    public void setMemberSolarSystems(List<SolarSystem> memberSolarSystems) {
-        this.memberSolarSystems = memberSolarSystems;
+    public void setSolarSystemNames(Map<String, String> solarSystemNames) {
+        this.solarSystemNames = solarSystemNames;
     }
 
     @Override
@@ -107,7 +108,7 @@ public class CelestialBody {
                 ", diameter=" + diameter +
                 ", mass=" + mass +
                 ", composition=" + composition +
-                ", memberSolarSystems=" + memberSolarSystems +
+                ", memberSolarSystems=" + solarSystemNames +
                 '}';
     }
 }
