@@ -6,10 +6,10 @@ public class UpdateSolarSystemRequest {
     private String username;
     private String solarSystemId;
     private String newSolarSystemName;
-    private String CelestialBodyDistanceToUpdate;
+    private String celestialBodyDistanceToUpdate;
     private Integer newDistanceFromCenter;
-    private String CelestialBodyIdToAddToSolarSystem;
-    private String CelestialBodyIdToRemoveFromSolarSystem;
+    private String celestialBodyIdToAddToSolarSystem;
+    private String celestialBodyIdToRemoveFromSolarSystem;
 
 
 
@@ -18,10 +18,10 @@ public class UpdateSolarSystemRequest {
         this.username = builder.username;
         this.solarSystemId = builder.solarSystemId;
         this.newSolarSystemName = builder.newSolarSystemName;
-        this.CelestialBodyDistanceToUpdate = builder.CelestialBodyIdDistanceToUpdate;
+        this.celestialBodyDistanceToUpdate = builder.celestialBodyDistanceToUpdate;
         this.newDistanceFromCenter = builder.newDistanceFromCenter;
-        this.CelestialBodyIdToAddToSolarSystem = builder.CelestialBodyIdToAddToSolarSystem;
-        this.CelestialBodyIdToRemoveFromSolarSystem = builder.CelestialBodyIdToRemoveFromSolarSystem;
+        this.celestialBodyIdToAddToSolarSystem = builder.celestialBodyIdToAddToSolarSystem;
+        this.celestialBodyIdToRemoveFromSolarSystem = builder.celestialBodyIdToRemoveFromSolarSystem;
     }
 
     public UpdateSolarSystemRequest() {
@@ -52,11 +52,11 @@ public class UpdateSolarSystemRequest {
     }
 
     public String getCelestialBodyDistanceToUpdate() {
-        return CelestialBodyDistanceToUpdate;
+        return celestialBodyDistanceToUpdate;
     }
 
     public void setCelestialBodyDistanceToUpdate(String celestialBodyDistanceToUpdate) {
-        CelestialBodyDistanceToUpdate = celestialBodyDistanceToUpdate;
+        this.celestialBodyDistanceToUpdate = celestialBodyDistanceToUpdate;
     }
 
     public Integer getNewDistanceFromCenter() {
@@ -68,19 +68,19 @@ public class UpdateSolarSystemRequest {
     }
 
     public String getCelestialBodyIdToAddToSolarSystem() {
-        return CelestialBodyIdToAddToSolarSystem;
+        return celestialBodyIdToAddToSolarSystem;
     }
 
     public void setCelestialBodyIdToAddToSolarSystem(String celestialBodyIdToAddToSolarSystem) {
-        CelestialBodyIdToAddToSolarSystem = celestialBodyIdToAddToSolarSystem;
+        this.celestialBodyIdToAddToSolarSystem = celestialBodyIdToAddToSolarSystem;
     }
 
     public String getCelestialBodyIdToRemoveFromSolarSystem() {
-        return CelestialBodyIdToRemoveFromSolarSystem;
+        return celestialBodyIdToRemoveFromSolarSystem;
     }
 
     public void setCelestialBodyIdToRemoveFromSolarSystem(String celestialBodyIdToRemoveFromSolarSystem) {
-        CelestialBodyIdToRemoveFromSolarSystem = celestialBodyIdToRemoveFromSolarSystem;
+        this.celestialBodyIdToRemoveFromSolarSystem = celestialBodyIdToRemoveFromSolarSystem;
     }
 
     @Override
@@ -102,10 +102,10 @@ public class UpdateSolarSystemRequest {
                 "username='" + username + '\'' +
                 ", solarSystemId='" + solarSystemId + '\'' +
                 ", newSolarSystemName='" + newSolarSystemName + '\'' +
-                ", CelestialBodyDistanceToUpdate='" + CelestialBodyDistanceToUpdate + '\'' +
+                ", celestialBodyDistanceToUpdate='" + celestialBodyDistanceToUpdate + '\'' +
                 ", newDistanceFromStar=" + newDistanceFromCenter +
-                ", CelestialBodyIdToAddToSolarSystem='" + CelestialBodyIdToAddToSolarSystem + '\'' +
-                ", CelestialBodyIdToRemoveFromSolarSystem='" + CelestialBodyIdToRemoveFromSolarSystem + '\'' +
+                ", celestialBodyIdToAddToSolarSystem='" + celestialBodyIdToAddToSolarSystem + '\'' +
+                ", celestialBodyIdToRemoveFromSolarSystem='" + celestialBodyIdToRemoveFromSolarSystem + '\'' +
                 '}';
     }
 
@@ -117,10 +117,10 @@ public class UpdateSolarSystemRequest {
         private String username;
         private String solarSystemId;
         private String newSolarSystemName;
-        private String CelestialBodyIdDistanceToUpdate;
+        private String celestialBodyDistanceToUpdate;
         private Integer newDistanceFromCenter;
-        private String CelestialBodyIdToAddToSolarSystem;
-        private String CelestialBodyIdToRemoveFromSolarSystem;
+        private String celestialBodyIdToAddToSolarSystem;
+        private String celestialBodyIdToRemoveFromSolarSystem;
 
         private Builder() {
 
@@ -141,23 +141,23 @@ public class UpdateSolarSystemRequest {
             return this;
         }
 
-        public Builder withCelestialBodyDistanceToUpdate(String celestialBodyDistanceToUpdate) {
-            this.CelestialBodyIdDistanceToUpdate = celestialBodyDistanceToUpdate;
+        public Builder withCelestialBodyDistanceToUpdate(String celestialBodyIdDistanceToUpdateToUse) {
+            this.celestialBodyDistanceToUpdate = celestialBodyIdDistanceToUpdateToUse;
             return this;
         }
 
-        public Builder withNewDistanceFromCenter(Integer newDistance) {
-            this.newDistanceFromCenter = newDistance;
+        public Builder withNewDistanceFromCenter(Integer newDistanceToUse) {
+            this.newDistanceFromCenter = newDistanceToUse;
             return this;
         }
 
-        public Builder withCelestialBodyIdToAddToSolarSystem(String bodyIdToAdd) {
-            this.CelestialBodyIdToAddToSolarSystem = bodyIdToAdd;
+        public Builder withCelestialBodyIdToAddToSolarSystem(String celestialBodyIdToAddToSolarSystemToUse) {
+            this.celestialBodyIdToAddToSolarSystem = celestialBodyIdToAddToSolarSystemToUse;
             return this;
         }
 
         public Builder withCelestialBodyIdToRemoveFromSolarSystem(String bodyToRemove) {
-            this.CelestialBodyIdToRemoveFromSolarSystem = bodyToRemove;
+            this.celestialBodyIdToRemoveFromSolarSystem = bodyToRemove;
             return this;
         }
 
