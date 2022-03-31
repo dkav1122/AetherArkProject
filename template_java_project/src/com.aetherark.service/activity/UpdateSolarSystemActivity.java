@@ -19,11 +19,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import javax.inject.Inject;
-import java.util.List;
-import java.util.Map;
-
-
-
 
 public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSystemRequest, UpdateSolarSystemResult> {
 
@@ -48,6 +43,7 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
         CelestialBody celestialBodyToRemove;
         int defaultDistance = 10;
 
+
         try {
             user = userDao.getUser(updateSolarSystemRequest.getUsername());
             solarSystem = solarSystemDao.getSolarSystem(updateSolarSystemRequest.getSolarSystemId());
@@ -57,11 +53,13 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
             throw new SolarSystemNotFoundException(e);
         }
 
-        if (updateSolarSystemRequest.getNewSolarSystemName() != null) {
+        if (updateSolarSystemRequest.getNewSolarSystemName() != null
+                && !updateSolarSystemRequest.getNewSolarSystemName().isBlank()) {
             if(!AetherArkServiceUtils.isValidString(updateSolarSystemRequest.getNewSolarSystemName())) {
                 throw new InvalidAttributeException("New solar system name : " + updateSolarSystemRequest.getNewSolarSystemName() + " contains invalid characters");
             }
             solarSystem.setSystemName(updateSolarSystemRequest.getNewSolarSystemName());
+            solarSystem.setCelestialBodies(celestialBodyDao.updateSolarSystemNameInCelestialBodies(solarSystem));
         }
 
         if(!solarSystem.getUsername().equals(user.getName())) {
@@ -70,7 +68,8 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
         }
 
         //update distance block
-        if (updateSolarSystemRequest.getCelestialBodyDistanceToUpdate() != null) {
+        if (updateSolarSystemRequest.getCelestialBodyDistanceToUpdate() != null
+                && !updateSolarSystemRequest.getCelestialBodyDistanceToUpdate().isBlank()) {
             try {
                 celestialBodyToUpdateDistance = celestialBodyDao.getCelestialBody(updateSolarSystemRequest.getCelestialBodyDistanceToUpdate());
             } catch (CelestialBodyNotFoundException e) {
@@ -86,19 +85,12 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
             if (newDistance == null || newDistance < 1) {
                 throw new InvalidAttributeException("Updated Celestial Body Distance must be greater than or equal to 1");
             }
-            //change #1
-            //solarSystem.getDistanceFromCenter().put(celestialBodyToUpdateDistance.getId(), newDistance);
-            Map<String, Integer> newMap = solarSystem.getDistanceFromCenter();
-            newMap.remove(celestialBodyToUpdateDistance.getId());
-            solarSystem.setDistanceFromCenter(newMap);
-
-            //I tried saving here
-            solarSystemDao.saveSolarSystem(solarSystem);
-            solarSystem = solarSystemDao.getSolarSystem(solarSystem.getSystemId());
+            solarSystem.getDistanceFromCenter().put(celestialBodyToUpdateDistance.getId(), newDistance);
         }
 
         //add body block
-        if (updateSolarSystemRequest.getCelestialBodyIdToAddToSolarSystem() != null) {
+        if (updateSolarSystemRequest.getCelestialBodyIdToAddToSolarSystem() != null
+        && !updateSolarSystemRequest.getCelestialBodyIdToAddToSolarSystem().isBlank()) {
             try {
                 celestialBodyToAdd = celestialBodyDao.getCelestialBody(updateSolarSystemRequest.getCelestialBodyIdToAddToSolarSystem());
 
@@ -110,27 +102,16 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
                 throw new CelestialBodyNotFoundException("The provided celestial body to add " + updateSolarSystemRequest.getCelestialBodyIdToAddToSolarSystem() +
                         " does not belong to this user: " + user.getName());
             }
-            //change #2
-          //  solarSystem.getCelestialBodies().add(celestialBodyToAdd);
-            List<CelestialBody> copiedList = solarSystem.getCelestialBodies();
-            copiedList.add(celestialBodyToAdd);
-            solarSystem.setCelestialBodies(copiedList);
+            CelestialBody updatedBody = celestialBodyDao.addSolarSystemNameToCelestialBody(celestialBodyToAdd.getId(), solarSystem);
 
-            //change #3
-           // solarSystem.getDistanceFromCenter().put(celestialBodyToAdd.getId(), defaultDistance);
+            solarSystem.getCelestialBodies().add(updatedBody);
+            solarSystem.getDistanceFromCenter().put(celestialBodyToAdd.getId(), defaultDistance);
 
-            Map<String, Integer> copiedMap = solarSystem.getDistanceFromCenter();
-            copiedMap.put(celestialBodyToAdd.getId(), defaultDistance);
-            solarSystem.setDistanceFromCenter(copiedMap);
-
-            solarSystemDao.saveSolarSystem(solarSystem);
-            solarSystem = solarSystemDao.getSolarSystem(solarSystem.getSystemId());
-
-            celestialBodyDao.addSolarSystemNameToCelestialBody(celestialBodyToAdd.getId(), solarSystem);
         }
 
         //remove body block
-        if (updateSolarSystemRequest.getCelestialBodyIdToRemoveFromSolarSystem() != null) {
+        if (updateSolarSystemRequest.getCelestialBodyIdToRemoveFromSolarSystem() != null
+        && !updateSolarSystemRequest.getCelestialBodyIdToRemoveFromSolarSystem().isBlank()) {
             try {
                 celestialBodyToRemove = celestialBodyDao.getCelestialBody(updateSolarSystemRequest.getCelestialBodyIdToRemoveFromSolarSystem());
             } catch (CelestialBodyNotFoundException e) {
@@ -141,35 +122,21 @@ public class UpdateSolarSystemActivity implements RequestHandler<UpdateSolarSyst
                 throw new CelestialBodyNotFoundException("The provided celestial body to remove " + updateSolarSystemRequest.getCelestialBodyIdToRemoveFromSolarSystem() +
                         " does not belong to this user: " + user.getName());
             }
-
-            //change #4
-            //solarSystem.getCelestialBodies().remove(celestialBodyToRemove);
-            List<CelestialBody> copiedBodies = solarSystem.getCelestialBodies();
-            copiedBodies.remove(celestialBodyToRemove);
-            solarSystem.setCelestialBodies(copiedBodies);
-
-            //change #5
-           // solarSystem.getDistanceFromCenter().remove(celestialBodyToRemove.getId());
-
-            Map<String, Integer> copiedMap = solarSystem.getDistanceFromCenter();
-            copiedMap.remove(celestialBodyToRemove.getId());
-            solarSystem.setDistanceFromCenter(copiedMap);
-
-            solarSystemDao.saveSolarSystem(solarSystem);
+            solarSystem.getCelestialBodies().remove(celestialBodyToRemove);
+            solarSystem.getDistanceFromCenter().remove(celestialBodyToRemove.getId());
 
             celestialBodyDao.removeSolarSystemNameFromCelestialBody(celestialBodyToRemove.getId(), solarSystem);
         }
 
         //at this point- updated distance, added cbody, removed cbody, updated name,
 
-       solarSystemDao.saveSolarSystem(solarSystem);
-       celestialBodyDao.updateSolarSystemInCelestialBodies(solarSystem);
+        solarSystemDao.saveSolarSystem(solarSystem);
 
-       SolarSystemModel solarSystemModel = new ModelConverter().toSolarSystemModel(solarSystem);
+        SolarSystemModel solarSystemModel = new ModelConverter().toSolarSystemModel(solarSystem);
 
-       return UpdateSolarSystemResult.builder()
-               .withSolarSystemModel(solarSystemModel)
-               .build();
+        return UpdateSolarSystemResult.builder()
+                .withSolarSystemModel(solarSystemModel)
+                .build();
 
     }
 

@@ -90,7 +90,7 @@ public class CelestialBodyDao {
         CelestialBody body = getCelestialBody(bodyId);
 
         Map<String, String> systemNames = body.getSolarSystemNames();
-        systemNames.remove(solarSystem.getSystemId(), solarSystem.getSystemName());
+        systemNames.remove(solarSystem.getSystemId());
         body.setSolarSystemNames(systemNames);
 
         return saveCelestialBody(body);
@@ -104,7 +104,7 @@ public class CelestialBodyDao {
     public void deleteSolarSystemFromAllCelestialBodies(SolarSystem solarSystem) {
         List<CelestialBody> bodyList = solarSystem.getCelestialBodies();
         for (CelestialBody body : bodyList) {
-            body.getSolarSystemNames().remove(solarSystem.getSystemId(), solarSystem.getSystemName());
+            body.getSolarSystemNames().remove(solarSystem.getSystemId());
             saveCelestialBody(body);
         }
     }
