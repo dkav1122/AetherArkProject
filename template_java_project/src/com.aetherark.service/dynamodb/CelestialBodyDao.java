@@ -7,7 +7,9 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Singleton
 public class CelestialBodyDao {
@@ -132,6 +134,19 @@ public class CelestialBodyDao {
      * @param bodyIds the List of ids to be deleted
      */
     public void deleteCelestialBodiesList(List<String> bodyIds) {
-        dynamoDbMapper.batchDelete(bodyIds);
+        List<CelestialBody> celestialBodyList = new ArrayList<>();
+        //iterate through the bodyIds
+        for (String bodyId: bodyIds){
+            // set a body Id to a new celestialbody object
+            CelestialBody bodyToGet = new CelestialBody();
+            bodyToGet.setId(bodyId);
+            // Add to the list
+            celestialBodyList.add(bodyToGet);
+        }
+
+        //If we need exact objects use this code
+//        Map<String, List<Object>> celestialBodies = dynamoDbMapper.batchLoad(celestialBodyList);
+        dynamoDbMapper.batchDelete(celestialBodyList);
+//        dynamoDbMapper.batchDelete(bodyIds);
     }
 }
