@@ -12,11 +12,39 @@ paths:
         Creates a user when the client supplies a required username, and email
         in the request.
 
-        Response with a user object.
-#      parameters: [ ]
+        Response: user object.
+      #      parameters: [ ]
       operationId: Create User
       requestBody:
         "$ref": "#/components/requestBodies/CreateUser"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/UserResponse"
+        "400":
+          $ref: '#/components/responses/400'
+        "401":
+          $ref: '#/components/responses/401'
+        "500":
+          $ref: '#/components/responses/500'
+  '/user/{username}':
+    get:
+      summary: Gets user information
+      description: >-
+        Gets a user when the client supplies a required username in the path,
+        and a email in the request.
+
+        Response: user object.
+      parameters:
+        - "$ref": "#/components/parameters/Username"
+      operationId: Get User
+      requestBody:
+        $ref: '#/components/requestBodies/UserWithUsernameEmail'
       responses:
         "200":
           description: Successful Operation
@@ -25,59 +53,67 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/ApiResponse"
-#        "400":
-#          description: Client Error
-#          content:
-#            application/json:
-#              schema:
-#                type: array
-#                items:
-#                  "$ref": "#/components/schemas/user"
-#        "500":
-#          description: Server Error
-#          content:
-#            application/json:
-#              schema:
-#                type: array
-#                items:
-#                  "$ref": "#/components/schemas/user"
-  '/user/{username}':
-    get:
-      summary: Gets user information
-      description: >-
-        Gets a user when the client supplies a required username in the path,
-        and a email in the request.
-
-        Response with a user object.
-      parameters:
-        - "$ref": "#/components/parameters/Username"
-      operationId: Get User
-      responses:
-        default:
-          description: Default response
+                  "$ref": "#/components/schemas/UserResponse"
+        "400":
+          $ref: '#/components/responses/400'
+        "404":
+          $ref: "#/components/responses/404"
+        "500":
+          $ref: '#/components/responses/500'
     put:
       summary: Updates user information
       description: >-
         Updates a user when the client supplies a required username in the
         path, and a email in the request.
+
+        Response: user object.
       parameters:
         - "$ref": "#/components/parameters/Username"
       operationId: Update User
+      requestBody:
+        $ref: '#/components/requestBodies/UserWithUsernameEmail'
       responses:
-        default:
-          description: Default response
+        "200":
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/UserResponse"
+        "400":
+          $ref: '#/components/responses/400'
+        "404":
+          $ref: '#/components/responses/404'
+        "500":
+          $ref: '#/components/responses/500'
     delete:
       summary: Deletes ALL user information
       description: >-
         Deletes a user when the client supplies a required username in the
         path, and a email in the request
+
+        Response: user object.
       parameters:
         - "$ref": "#/components/parameters/Username"
       operationId: Delete User
+      requestBody:
+        $ref: '#/components/requestBodies/UserWithUsernameEmail'
       responses:
-        default:
-          description: Default response
+        "200":
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/UserResponse"
+        "400":
+          $ref: '#/components/responses/400'
+        "404":
+          $ref: '#/components/responses/404'
+        "500":
+          $ref: '#/components/responses/500'
 
   '/user/{username}/solarSystem':
     post:
@@ -87,11 +123,18 @@ paths:
         system ID and solar system name in the request
 
         Returns the new solar system including a unique ID in the response.
-#      parameters: [ ]
+      parameters:
+        - "$ref": "#/components/parameters/Username"
       operationId: Create Solar System
       responses:
-        default:
-          description: Default response
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/UserResponse"
 
   '/user/{username}/solarSystem/{solarSystemId}':
     get:
@@ -132,43 +175,50 @@ paths:
     post:
       summary: ''
       description: ''
-#      parameters: []
+      parameters:
+        - "$ref": "#/components/parameters/Username"
       operationId: Create Celestial Body
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/UserResponse"
+
+  '/user/{username}/celestialBody/{celestialBodyId}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        - "$ref": "#/components/parameters/Username"
+        - "$ref": "#/components/parameters/CelestialBodyId"
+      operationId: Get Celestial Body
       responses:
         default:
           description: Default response
-
-  '/user/{username}/celestialBody/{celestialBodyId}':
-      get:
-        summary: ''
-        description: ''
-        parameters:
-          - "$ref": "#/components/parameters/Username"
-          - "$ref": "#/components/parameters/CelestialBodyId"
-        operationId: Get Celestial Body
-        responses:
-          default:
-            description: Default response
-      put:
-        summary: ''
-        description: ''
-        parameters:
-          - "$ref": "#/components/parameters/Username"
-          - "$ref": "#/components/parameters/CelestialBodyId"
-        operationId: Update Celestial Body
-        responses:
-          default:
-            description: Default response
-      delete:
-        summary: ''
-        description: ''
-        parameters:
-          - "$ref": "#/components/parameters/Username"
-          - "$ref": "#/components/parameters/CelestialBodyId"
-        operationId: Delete Celestial Body
-        responses:
-          default:
-            description: Default response
+    put:
+      summary: ''
+      description: ''
+      parameters:
+        - "$ref": "#/components/parameters/Username"
+        - "$ref": "#/components/parameters/CelestialBodyId"
+      operationId: Update Celestial Body
+      responses:
+        default:
+          description: Default response
+    delete:
+      summary: ''
+      description: ''
+      parameters:
+        - "$ref": "#/components/parameters/Username"
+        - "$ref": "#/components/parameters/CelestialBodyId"
+      operationId: Delete Celestial Body
+      responses:
+        default:
+          description: Default response
 
 components:
   parameters:
@@ -233,8 +283,12 @@ components:
           type: string
         solarSystemIds:
           type: array
+          items:
+            type: string
         celestialBodyIds:
           type: array
+          items:
+            type: string
     celestialBodyResponse:
       type: object
       properties:
@@ -248,6 +302,8 @@ components:
           type: integer
         memberSolarSystems:
           type: array
+          items:
+            type: object
     solarSystemResponse:
       type: object
       properties:
@@ -257,8 +313,12 @@ components:
           type: string
         celestialBodies:
           type: array
+          items:
+            type: object
         distanceFromCenter:
           type: array
+          items:
+            type: object
         username:
           type: string
   # Does not have to be used
@@ -270,35 +330,68 @@ components:
             $ref: '#/components/schemas/UsernameEmailRequest'
       description: Username and Email to create user
       required: true
-    getUser:
+    UserWithUsernameEmail:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/UserEmailRequest'
       description: Email that needs to be used to get user
       required: true
+
   responses:
-   "200":
-     description: Successful Operation
-     content:
-       application/json:
-         schema:
-           type: array
-           items:
-             "$ref": "#/components/schemas/ApiResponse"
-   "400":
-     description: Client Error
-     content:
-       application/json:
-         schema:
-           type: array
-           items:
-             "$ref": "#/components/schemas/ApiResponse"
-   "500":
-     description: Server Error
-     content:
-       application/json:
-         schema:
-           type: array
-           items:
-             "$ref": "#/components/schemas/ApiResponse"
+    "200":
+      description: Successful Operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              "$ref": "#/components/schemas/ApiResponse"
+    "400":
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              "$ref": "#/components/schemas/ApiResponse"
+    "401":
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              "$ref": "#/components/schemas/ApiResponse"
+    "403":
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              "$ref": "#/components/schemas/ApiResponse"
+    "404":
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              "$ref": "#/components/schemas/ApiResponse"
+    "418":
+      description: I'm a teapot
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              "$ref": "#/components/schemas/ApiResponse"
+    "500":
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              "$ref": "#/components/schemas/ApiResponse"
