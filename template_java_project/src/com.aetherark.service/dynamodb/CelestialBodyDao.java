@@ -163,6 +163,15 @@ public class CelestialBodyDao {
      * @param bodyIds the List of ids to be deleted
      */
     public void deleteCelestialBodiesList(List<String> bodyIds) {
-        dynamoDbMapper.batchDelete(bodyIds);
+        List<CelestialBody> celestialBodyList = new ArrayList<>();
+        //iterate through the bodyIds
+        for (String bodyId: bodyIds){
+            // set a body Id to a new celestialbody object
+            CelestialBody bodyToGet = new CelestialBody();
+            bodyToGet.setId(bodyId);
+            // Add to the list
+            celestialBodyList.add(bodyToGet);
+        }
+        dynamoDbMapper.batchDelete(celestialBodyList);
     }
 }
