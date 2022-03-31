@@ -25,13 +25,11 @@ public class UpdateCelestialBodyActivity
 
     private final CelestialBodyDao celestialBodyDao;
     private final SolarSystemDao solarSystemDao;
-    private final UserDao userDao;
 
-    @Inject UpdateCelestialBodyActivity(CelestialBodyDao celestialBodyDao,
-                                        SolarSystemDao solarSystemDao, UserDao userDao) {
+    @Inject
+    UpdateCelestialBodyActivity(CelestialBodyDao celestialBodyDao, SolarSystemDao solarSystemDao) {
         this.celestialBodyDao = celestialBodyDao;
         this.solarSystemDao = solarSystemDao;
-        this.userDao = userDao;
     }
 
     @Override
