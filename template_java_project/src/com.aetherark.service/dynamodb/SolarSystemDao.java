@@ -53,10 +53,7 @@ public class SolarSystemDao {
             // Add to the list
             solarSystemList.add(systemToGet);
         }
-        //If we need exact objects use this code
-//        Map<String, List<Object>> solarSystems = dynamoDBMapper.batchLoad(solarSystemList);
         dynamoDBMapper.batchDelete(solarSystemList);
-
     }
 
     public void deleteCelestialBodyFromAllSolarSystems(CelestialBody celestialBody) {
@@ -81,6 +78,4 @@ public class SolarSystemDao {
         return new ArrayList<>(dynamoDBMapper.query(SolarSystem.class, queryExpression));
 
     }
-
-
 }

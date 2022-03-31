@@ -124,10 +124,6 @@ public class CelestialBodyDao {
             saveCelestialBody(body);
         }
     }
-
-
-
-
     /**
      * Deletes every {@link CelestialBody} with a provided id.
      *
@@ -143,10 +139,6 @@ public class CelestialBodyDao {
             // Add to the list
             celestialBodyList.add(bodyToGet);
         }
-
-        //If we need exact objects use this code
-//        Map<String, List<Object>> celestialBodies = dynamoDbMapper.batchLoad(celestialBodyList);
         dynamoDbMapper.batchDelete(celestialBodyList);
-//        dynamoDbMapper.batchDelete(bodyIds);
     }
 }
