@@ -6,11 +6,13 @@ userForm.onsubmit = async function(evt) {
   const username = document.querySelector("#user-name").value;
   const email = document.querySelector("#password").value;
   const userObj = {
+    "username": username,
     "email": email
   }
-  axios.get(`https://6e43teedbd.execute-api.us-west-2.amazonaws.com/Teststage/user/${username}`, userObj ).then((res) => {
-    console.log(res);
-    window.location.reload();
+  axios.get(`https://6e43teedbd.execute-api.us-west-2.amazonaws.com/Teststage/user/${username}`,
+    userObj ).then((res) => {
+    console.log(res.data);
+    window.location.replace("/user/user-home.html");
   })
 }
 
@@ -27,17 +29,21 @@ window.onload = async function(evt) {
   // })
 }
 
-// function populatePlaylists(playlistData) {
+function populatePlaylists(playlistData) {
 
-//   for (let playlist of playlistData) {
-//     let li = document.createElement("li");
-//     let a = document.createElement("a");
-//     let text = document.createTextNode(playlist.name);
+  for (let playlist of playlistData) {
+    let li = document.createElement("li");
+    let a = document.createElement("a");
+    let text = document.createTextNode(playlist.name);
+    //we want to have a link populate our form instead
+    a.setAttribute('href', `./playlist.html?id=${playlist.id}`);
 
-//     a.setAttribute('href', `./playlist.html?id=${playlist.id}`);
+    a.appendChild(text);
+    li.appendChild(a);
+    playlistsList.appendChild(li);
+  }
+}
 
-//     a.appendChild(text);
-//     li.appendChild(a);
-//     playlistsList.appendChild(li);
-//   }
-// }
+function populateForm() {
+  //
+}
