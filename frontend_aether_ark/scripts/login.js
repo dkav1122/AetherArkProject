@@ -1,49 +1,45 @@
 const userForm = document.querySelector("#login-username-form");
-// const playlistsList = document.querySelector("#playlists");
+const username = document.querySelector("#login-user-name").value;
+// exports.username = username;
+const email = document.querySelector("#login-email").value;
+const userObj = {
+  "email": email
+}
+
 
 userForm.onsubmit = async function(evt) {
   evt.preventDefault();
-  const username = document.querySelector("#user-name").value;
-  const email = document.querySelector("#password").value;
-  const userObj = {
-    "username": username,
-    "email": email
+  console.log("Submitting User Data...");
+  axios.get(`https://6e43teedbd.execute-api.us-west-2.amazonaws.com/Teststage/user/${username}`, userObj
+  , 
+  {
+    authorization: {
+      'x-api-key': 'iSw09XZBjq3H6JowPSXa08qph5Kwdw7F87Ry5iwy'
+    }
   }
-  axios.get(`https://6e43teedbd.execute-api.us-west-2.amazonaws.com/Teststage/user/${username}`,
-    userObj ).then((res) => {
+  )
+    .then((res) => {
+
     console.log(res.data);
+    persistUserdata(res.data.user)
     window.location.replace("/user/user-home.html");
+  }).catch(function (error) {
+    // handle error
+    console.log(error);
+    alert(error + "\nSomething went wrong!")
   })
+  window.location.replace("/user/user-home.html");
+
 }
 
 window.onload = async function(evt) {
-  // evt.preventDefault();
-  // console.log("Getting Playlist Data...");
-  // axios.get("https://svebsuap66.execute-api.us-west-2.amazonaws.com/prod/playlists", {
-  //   authorization: {
-  //     'x-api-key': 'K7CHRL6aqt1C6eGJ9EHyFaZCn86G0fyI2sTZKSkW'
-  //   }
-  // }).then((res) => {
-  //   console.log(res.data);
-  //   populatePlaylists(res.data.playlists);
-  // })
+
 }
 
-function populatePlaylists(playlistData) {
+function persistUserdata(userData) {
 
-  for (let playlist of playlistData) {
-    let li = document.createElement("li");
-    let a = document.createElement("a");
-    let text = document.createTextNode(playlist.name);
-    //we want to have a link populate our form instead
-    a.setAttribute('href', `./playlist.html?id=${playlist.id}`);
-
-    a.appendChild(text);
-    li.appendChild(a);
-    playlistsList.appendChild(li);
-  }
+    exports.name =userData.username;
+  
 }
 
-function populateForm() {
-  //
-}
+
