@@ -43,23 +43,32 @@ definition for your endpoints (can be code/configuration, or can be
 documentation). List one thing that your team learned about designing a good
 API.
 
-*Endpoint definition location:*       
-*What we learned:*    
+*Endpoint definition location:* https://aether-ark-api-def.s3.us-west-2.amazonaws.com/index.html   
+*What we learned:*  We learned the importance of marking the difference between a request that has data in the 
+                    query and data that belongs in the request body. 
 
 **Develop a service endpoint definition that uses complex inputs and outputs.**
 Select one of your endpoints and list the operation’s input and output objects.
 Under each, list its attributes.
 
-*Endpoint:*     
-*Input object(s):*      
+*Endpoint: /user     
+*Input object(s):Username & Email Request      
 
-* attribute 1
-* ...
+* username: string
+* email: string
 
-*Output object(s):*      
+*Output object(s): 201 Created User Object     
 
-* attribute 1
-* ...
+* username : string
+* email: string
+* solarSystemIds: array[ string ]
+* celestialBodyIds: array [ string ]
+
+*Output object: 400 Bad Request
+
+* code: 0
+* type: string
+* message: string
 
 **Given a user story that requires a user to provide values to a service
 endpoint, design a service endpoint including inputs, outputs, and errors.**
@@ -67,19 +76,19 @@ Select one of your endpoints that accepts input values from a client. List the
 error cases you identified and how the service responds in each case. Provide at
 most 3 error cases.
 
-|**Endpoint:**  |                     |
+|**Endpoint:**  |       /user/{username}              |
 |---            |---                  |
 |**Error case** |**Service response** |
-|               |                     |
-|               |                     |
-|               |                     |
+| Bad Request   | 400 Error Message  Invalid Characters                  |
+|  Not Found             |   404 Error Message User does not Exist                |
+|  Bad Request          |  400 Error Message Invalid email                    |
 
 **Develop a service endpoint definition that uses query parameters to determine
 how results are sorted or filtered.** List at least one endpoint that allows
 sorting or filtering of results. Which attribute(s) can be sorted/filtered on?
 
-*Endpoint:*         
-*Attribute(s):*  
+*Endpoint:/user/{username}/solarSystem/{solarSystemId       
+*Attribute(s): getAll: boolean (returns all solar systems for the user)  
 
 **Determine whether a given error condition should result in a client or server
 exception.** List one client exception and one server exception that your
@@ -87,17 +96,17 @@ service code throws. List one condition in which this exception is thrown.
 
 |                       |**Exception** |**One case in which it is thrown** |
 |---	                |---	       |---	                               |
-|**Client exception:**  |	           |	                               |
-|**Service exception:** |	           |	                               |
+|**Client exception:**  | SolarSystemNotFoundException	           | User provides invalid solar system id	                               |
+|**Service exception:** | Internal Server Error	           |	DynamoDB could not process request                               |
 
 ### DynamoDB Table Design
 
 **Decompose a given set of use cases into a set of DynamoDB tables that provides
 efficient data access.** List the DynamoDB tables in your project:
 
-1.  
-2.  
-3. 
+1.  Users
+2.  SolarSystems
+3. CelestialBody
 
 
 **Design a DynamoDB table key schema that allows items to be uniquely
@@ -105,23 +114,24 @@ identified.** Describe the primary key structure for your DynamoDB table with
 the most interesting primary key. In a sentence or two, explain your choice of
 partition/sort key(s).
 
-1.
+1. Solar System Table uses a generated solar system Id to act as the partition key. Using a partition
+    key only is a simple way to enforce secuirty for Users to only add planets to solar systems that they own.
 
 **Design the attributes of a DynamoDB table given a set of use cases.** List a
 DynamoDB table with at least 3 attributes. List one relevant use case that uses
 the attribute. In one sentence, describe why the attribute is included.
 
-**Table name:**   
+**Table name:SolarSystems  
  
 **Attributes:**
 
 |Attribute name |(One) relevant use case |attribute purpose |
 |---            |---                     |---               |
-|               |                        |                  |
-|               |                        |                  |
-|               |                        |                  |
-|               |                        |                  |
-|               |                        |                  |
+|   solarSystemId            |  User wants to get a solar system| solarSystemId acts as the partition key |
+|   celestialBodies            | User wants to Remove a planet from a solar system| CelestialBodies holds a list of all of a solar systems member celestial bodies                  |
+|   distanceFromCenter  | User wants to change how far a planet is from the center of the solar system| A map where planetId's is the key and distance from center(integer) is the value that can be updated                  |
+|   SystemName            | User wants to change the name of their solar system | String value representing name of solar system                  |
+|   UserName            | User wants to see all of their solar systems                        | Check solar systems to see if solar system's username matches the User making the getAll request                  |
 
 ### DynamoDB Indexes
 
@@ -130,20 +140,22 @@ supported by a provided DynamoDB table.** In one or two sentences, explain why
 you created one of the GSIs that your project uses, including one use case that
 uses that index.
 
-**Table name:**
+**Table name: SolarSystems
 
-**Table keys:**
+**Table keys: solarSystemId
 
-**GSI keys:**
+**GSI keys: username
 
-**Use case for GSI:**
+**Use case for GSI: User wants to retrieve all of their solar systems. 
 
 **Implement functionality that uses query() to retrieve items from a provided
 DynamoDB's GSI.** List one of your use cases that uses `query()` on a GSI.
 
-**Table name:**
+**Table name: SolarSystems (GSI = GetAllSolarSystemsForUser)
 
-**Use case for `query()` on GDI:**
+**Use case for `query()` on GSI:** User provides getAll = true, and instead of retrieving a single solar system
+                                    by the solarSystemId, they now retrieve all of their solar systems using their username as
+                                    the partition key on the GSI.
 
 ## Soft(er) Outcomes
 
