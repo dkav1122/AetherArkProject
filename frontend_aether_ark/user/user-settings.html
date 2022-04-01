@@ -16,11 +16,47 @@
 
 
     <section>
-      <div>update</div>
-      <div>delete</div>
-      <div>??????</div>
-      <p>put form here</p>
+      <form id="settings-username-form">
 
+        <div class="form-content">
+          <label>
+            <input type="text" required class="validated-field" id="settings-username" placeholder="name" 
+            data-tip="Cannot contain characters \ ' " autofocus>
+          </label>
+        </div>
+
+        <div class="form-content">
+          <label>
+            <input type="text" required id="settings-email" class="email" placeholder="email"
+              data-tip="Cannot contain characters \ ' ">
+          </label>
+        </div>
+
+        <div>
+          <input type="submit" id="update" class="Userbutton" value="Update">
+        </div>
+      </form>
+
+      <form id="settings-username-form-delete">
+
+        <div class="form-content">
+          <label>
+            <input type="text" required class="validated-field" id="settings-username" placeholder="name" 
+            data-tip="Cannot contain characters \ ' " autofocus>
+          </label>
+        </div>
+
+        <div class="form-content">
+          <label>
+            <input type="text" required id="settings-email" class="email" placeholder="email"
+              data-tip="Cannot contain characters \ ' ">
+          </label>
+        </div>
+
+        <div>
+          <input type="submit" id="delete" class="Userbutton" value="Delete">
+        </div>
+      </form>
     </section>
 
 
