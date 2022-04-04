@@ -1,25 +1,21 @@
-// const userForm = document.querySelector("#login-username-form");
+const userForm = document.querySelector("#fff");
 const solarSystemList = document.querySelector("#user-solar-list");
 const celestialBodyList = document.querySelector("#user-body-list");
-const username = sessionStorage.getItem('username');
-const email = sessionStorage.getItem('email');
-const url = `https://6e43teedbd.execute-api.us-west-2.amazonaws.com/Teststage/user/${username}`
-
-const userObj = {
-  "email": email
-}
 
 userForm.onsubmit = async function(evt) {
-
 }
 
 window.onload = async function(evt) {
-  
   evt.preventDefault();
   
+  username = localStorage.getItem('username');
+  email = localStorage.getItem('email');
+  const url = `https://6e43teedbd.execute-api.us-west-2.amazonaws.com/Teststage/user/`
+  const userObj = {
+    "email": email
+  }
   console.log("Getting User Data...");
-  axios.get(`https://6e43teedbd.execute-api.us-west-2.amazonaws.com/Teststage/user/${username}`, userObj
-
+  axios.get(`${url}${username}`, userObj
 
   ).then((res) => {
     console.log(res.data);
@@ -28,7 +24,7 @@ window.onload = async function(evt) {
   }).catch(function (error) {
     // handle error
     console.log(error);
-    alert(error + "\nSomething went wrong!");
+    // alert(error + "\nSomething went wrong!");
   })
 }
 
