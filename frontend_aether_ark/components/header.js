@@ -1,4 +1,4 @@
-const userUrl = "user"
+ const userUrl = "user"
 class Header extends HTMLElement {
     constructor() {
         super();
@@ -44,9 +44,7 @@ class Header extends HTMLElement {
     </Style>
     <header>
     <div class="navbar">
-
-    <a class="active" href="/${userUrl}/user-home.html"><i class="fa fa-fw fa-home"></i> Home</a> 
-
+    <a class="active" href="/user/user-home.html"><i class="fa fa-fw fa-home"></i> Home</a> 
     <a href="/celestial-bodies/celestial-bodies-home.html"><i class="fa fa-fw fa-search"></i> Celestial Bodies</a> 
     <a href="/solar-systems/solar-systems-home.html"><i class="fa fa-fw fa-envelope"></i> Solar Systems</a> 
     <a href="/user/user-settings.html"><i class="fa fa-fw fa-user"></i> Settings</a>
