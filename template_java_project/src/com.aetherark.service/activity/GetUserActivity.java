@@ -49,7 +49,9 @@ import javax.inject.Inject;
 
         String requestUsername = getUserRequest.getUsername();
         String requestEmail = getUserRequest.getEmail();
-
+//        if (requestEmail == null || requestUsername == null){
+//            throw new InvalidAttributeValueException("");
+//        }
         User user;
         try {
             user = userDao.getUser(requestUsername);

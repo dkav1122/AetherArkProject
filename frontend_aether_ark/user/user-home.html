@@ -4,7 +4,9 @@
   <link rel="stylesheet" href="/styles/user-home.css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="/components/header.js" defer></script>
-  <script src="/scripts/user-home.js" defer></script>
+  <script type="module" src="/modules/utils.js" defer></script>
+  <script type="module" src="/modules/user-home.js" defer></script>
+
   <title>Home</title>
   <link rel="icon"
     href="https://www.kindpng.com/picc/m/107-1076128_transparent-planet-png-planet-vector-png-png-download.png"
@@ -13,39 +15,33 @@
 
 <body>
   <header-component></header-component>
+<main>
 
-  <main>
-    <form action="" id="fff">
-      <input type="submit" id="login" class="Userbutton" value="Login"></div>
-    </form>
+  <div id="grid-container">
     <div>
       <section id="user-solar-system" class="section-card">
         <h1>Solarsystems</h1>
-        <p>this is where the solar systems list for user lives</p>
         <p>Select to view in the viewport</p>
-        <ul id="user-solar-list">
+        <ul id="user-solar-list" class="vertical-menu">
         </ul>
-
+        
       </section>
-
+      
       <section id="user-celestial-body" class="section-card">
         <h1>Celestial Bodies</h1>
-        <p>this is where the celestial bodys list for user lives</p>
         <p>Select to view in the viewport</p>
-        <ul id="user-body-list">
+        <ul id="user-body-list" class="vertical-menu">
         </ul>
       </section>
     </div>
-    <section id="user-view-area" class="section-card">
-      <h1>User view area "view port"</h1>
-      <div>what do we do here?.</div>
-      <div>maybe view solarsystems in actions on a canvas?</div>
-      <canvas>
-
+    <div id="user-view-area" class="view-port">
+      <h1>View Port</h1>
+      <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
       </canvas>
-    </section>
-
-  </main>
+    </div>
+    
+  </div>
+</main>
 </body>
 
 

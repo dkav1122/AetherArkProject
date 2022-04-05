@@ -1,4 +1,4 @@
-table {
+/* table {
   border-collapse: collapse;
 }
 
@@ -12,27 +12,31 @@ th {
 
 th, td {
   padding: 6px;
-}
-
+} */
 .login-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+ 
   background-color: rgb(3, 0, 0);
 }
 
 .login-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  width: 200px;
-  padding: 32px;
-  background: white;
-  box-shadow: 0 4px 8px 0 rgba(249, 246, 246, 0.434), 0 6px 20px 0 hsla(0, 96%, 44%, 0.19);
+  padding: 5px;
+  margin: 0;
+  background: rgb(231, 229, 229);
+  box-shadow: 0 4px 8px 0 rgb(121, 3, 240), 0 6px 20px 0 hsla(319, 96%, 44%, 0.669);
   border-radius: 20px;
+  height: 54vh;
+  width:50vh;
+  z-index: 4;
 }
 
-
-.userbutton {
+.form-content{
   margin: 10px;
 }
-
-
+.userbutton {
+  margin: 2px;
+}

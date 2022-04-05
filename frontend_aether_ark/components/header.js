@@ -1,11 +1,10 @@
- const userUrl = "user"
 class Header extends HTMLElement {
     constructor() {
         super();
     }
 
     connectedCallback() {
-        this.innerHTML = ` 
+        this.innerHTML =`
     <Style>
         /* Style the navigation bar */
         .navbar {
@@ -31,7 +30,7 @@ class Header extends HTMLElement {
         
         /* Current/active navbar link */
         .active {
-        background-color: #04AA6D;
+        background-color: rgb(121, 3, 240);
         }
         
         /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
@@ -48,7 +47,7 @@ class Header extends HTMLElement {
     <a href="/celestial-bodies/celestial-bodies-home.html"><i class="fa fa-fw fa-search"></i> Celestial Bodies</a> 
     <a href="/solar-systems/solar-systems-home.html"><i class="fa fa-fw fa-envelope"></i> Solar Systems</a> 
     <a href="/user/user-settings.html"><i class="fa fa-fw fa-user"></i> Settings</a>
-    <a href="/login.html"><i class="fa fa-fw fa-user"></i> Logout</a>
+    <a href="/user/login.html"><i class="fa fa-fw fa-user"></i> Logout</a>
   </div>
     </header>
  `;

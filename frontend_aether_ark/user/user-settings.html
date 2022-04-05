@@ -3,6 +3,8 @@
   <meta name="viewport content=" width=device-width, initial-scale="1.0">
   <link rel="stylesheet" href="/styles/template.css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="module" src="/modules/utils.js"></script>
+  <script type="module" src="/modules/user-settings.js" defer></script>
   <script src="/components/header.js" defer></script>
   <title>Settings</title>
   <link rel="icon"
@@ -14,52 +16,34 @@
 
   <main>
 
-
-    <section>
       <form id="settings-username-form">
 
         <div class="form-content">
           <label>
-            <input type="text" required class="validated-field" id="settings-username" placeholder="name" 
+            <input type="text" required class="validated-field" id="settings-username" placeholder="Username" 
             data-tip="Cannot contain characters \ ' " autofocus>
           </label>
         </div>
 
         <div class="form-content">
           <label>
-            <input type="text" required id="settings-email" class="email" placeholder="email"
+            <input type="text" required id="settings-email" class="email" placeholder="Email"
+              data-tip="Cannot contain characters \ ' ">
+          </label>
+        </div>
+
+        <div class="form-content">
+          <label>
+            <input type="text" id="settings-updatedEmail" class="email" placeholder="Updated Email"
               data-tip="Cannot contain characters \ ' ">
           </label>
         </div>
 
         <div>
           <input type="submit" id="update" class="Userbutton" value="Update">
-        </div>
-      </form>
-
-      <form id="settings-username-form-delete">
-
-        <div class="form-content">
-          <label>
-            <input type="text" required class="validated-field" id="settings-username" placeholder="name" 
-            data-tip="Cannot contain characters \ ' " autofocus>
-          </label>
-        </div>
-
-        <div class="form-content">
-          <label>
-            <input type="text" required id="settings-email" class="email" placeholder="email"
-              data-tip="Cannot contain characters \ ' ">
-          </label>
-        </div>
-
-        <div>
           <input type="submit" id="delete" class="Userbutton" value="Delete">
         </div>
       </form>
-    </section>
-
-
 
   </main>
 </body>
