@@ -1,17 +1,5 @@
-# [Aether Ark] Project Rubric
+# Aether Ark Project Rubric
 
-## Background
-
-*This captures the expectations that we have for your team during the unit.
-This is how we will evaluate whether you have demonstrated these expectations.*
-
-## Instructions
-
-*As a team, complete this rubric (everything except for the Appendix) by
-answering the questions below. Each question should usually only require one or
-two sentences, so please be brief. The remainder of expectations will be
-evaluated by instructors, so you don’t need to write anything in the Appendix.
-We want you to see the full set of expectations for transparency’s sake.*
 
 ## Deliverables
 
@@ -20,19 +8,17 @@ We want you to see the full set of expectations for transparency’s sake.*
 |Deliverable                                                      |Due Date                  |Date Completed |URL                               |
 |---                                                              |---                       |---            |---                               |
 |Team name                                                        |Sprint 1 Module 1         | 3/7/2022      |name: Aether_Ark                  |
-|[Design Document - problem statement](design_document.md)        |Sprint 1 Module 2         | 3/7/2022      |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/main/project_documents/aether_ark_design_document.md|
+|Design Document - problem statement                              |Sprint 1 Module 2         | 3/7/2022      |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/main/project_documents/aether_ark_design_document.md|
 |[Team Charter](team_charter.md)                                  |Sprint 1 Module 3         | 3/9/2022      |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/main/project_documents/team_charter.md|
-|[Design Document](design_document.md)                            |Sprint 1 Friday by 5pm    | 3/11/2022     |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/main/project_documents/aether_ark_design_document.md|
-|Project Completion (Feature Complete)                            |Sprint 3 Friday by 5pm    |               |                                  |
-|[Team Reflection](reflection.md)                                 |Sprint 4 Wednesday by 5PM |               |                                  |
-|[Accomplishment Tracking (person 1)](accomplishment_tracking.md) |Sprint 4 Wednesday by 5PM |               |                                  |
-|[Accomplishment Tracking (person 2)](accomplishment_tracking.md) |Sprint 4 Wednesday by 5PM |               |                                  |
-|[Accomplishment Tracking (person 3)](accomplishment_tracking.md) |Sprint 4 Wednesday by 5PM |               |                                  |
-|[Accomplishment Tracking (person 4)](accomplishment_tracking.md) |Sprint 4 Wednesday by 5PM |               |                                  |
-|Self Reflection (person 1)                        |Sprint 4 Wednesday by 5PM |               |n/a (will be submitted via Canvas - "Wrap-up" section) |
-|Self Reflection (person 2)                        |Sprint 4 Wednesday by 5PM |               |n/a (will be submitted via Canvas - "Wrap-up" section) |
-|Self Reflection (person 3)                        |Sprint 4 Wednesday by 5PM |               |n/a (will be submitted via Canvas - "Wrap-up" section) |
-|Self Reflection (person 4)                        |Sprint 4 Wednesday by 5PM |               |n/a (will be submitted via Canvas - "Wrap-up" section) |
+|[Design Document](aether_ark_design_document.md)                 |Sprint 1 Friday by 5pm    | 3/11/2022     |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/main/project_documents/aether_ark_design_document.md|
+|Project Completion (Feature Complete)                            |Sprint 3 Friday by 5pm    | 4/1/2022      |https://github.com/BloomTechBackend/bd-team-project-aether_ark|
+|[Team Reflection](Aether_Ark_reflection.md)                      |Sprint 4 Wednesday by 5PM | 4/6/2022      |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/main/template_java_project/project_documents/Aether_Ark_reflection.md|
+|Accomplishment Tracking (Dixon)                                  |Sprint 4 Wednesday by 5PM | 4/6/2022      |template_java_project/project_documents/DixonsAccomplishmentTracking.md|
+|Accomplishment Tracking (Eric)                                   |Sprint 4 Wednesday by 5PM | 4/6/2022      |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/c7105c8354dc76bdcf56f06013b6fcd633c21654/template_java_project/project_documents/accomplishment_tracking_ERIC.md|
+|Accomplishment Tracking (Adam)                                   |Sprint 4 Wednesday by 5PM | 4/6/2022      |https://github.com/BloomTechBackend/bd-team-project-aether_ark/blob/c7105c8354dc76bdcf56f06013b6fcd633c21654/template_java_project/project_documents/Adam_accomplishment_tracking.md|
+|Self Reflection (person 1)                                       |Sprint 4 Wednesday by 5PM | 4/6/2022      |n/a (will be submitted via Canvas - "Wrap-up" section) |
+|Self Reflection (person 2)                                       |Sprint 4 Wednesday by 5PM | 4/6/2022      |n/a (will be submitted via Canvas - "Wrap-up" section) |
+|Self Reflection (person 3)                                       |Sprint 4 Wednesday by 5PM | 4/6/2022      |n/a (will be submitted via Canvas - "Wrap-up" section) |
 
 ## Technical Learning Objectives
 
@@ -164,10 +150,9 @@ team member learned:
 
 |Team Member |Something new the team member learned |   
 |---   |---                                   |
-|      |                                      |   
-|      |                                      |     
-|      |                                      |     
-|      |                                      |     
+|Adam  |API Gateway, Postman                  |   
+|Dixon |Javascript, Trello                    |     
+|Eric  |Javascript, Trello                    |     
 
 **Identify key words to research to accomplish a technical goal | Use sources
 like sage and stack overflow to solve issues encountered while programming.**
@@ -175,19 +160,20 @@ Give an example of a search term that your team might have used to find an
 answer to a technical question/obstacle that your team ran into. List the
 resource that you found that was helpful.
 
-**Search terms:**      
-**Helpful resource:**      
+**Search terms:** Enable CORS, API Gateway      
+**Helpful resource:** docs.aws.amazon
 
 **Find material online to learn new technical topics.** List one resource that
 your team found on your own that helped you on your project.
 
-**Topic:**
+**Topic:** How to make a canvas in html using javascript
 
-**Resource:**
+**Resource:** W3 Schools
 
 **Share what was worked on yesterday, the plan for today, and any blockers as a
 part of a scrum standup.** In one or two sentences, describe what your team
 found to be the most useful outcome from holding daily standups.
 
-1.
-
+* We were able to clearly communicate about where each of us were in our personal tasks, 
+and how we could move forward as a team on combined tasks. Also, when and how to resolve
+blockers from another team member's work. 
