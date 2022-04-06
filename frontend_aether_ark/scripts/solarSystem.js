@@ -1,6 +1,9 @@
+// import { persistUserdata }
+//     from "/modules/utils.js";
 const solarSystemTable = document.querySelector("#solar-system-table");
 const urlParams = new URLSearchParams(window.location.search);
 //const username = urlParams.get('username');
+
 
 
 
@@ -9,8 +12,9 @@ window.onload = async function (evt) {
     console.log("Getting All Solar Systems...");
     // const username = document.querySelector("#user-name").value;
     // const email = document.querySelector("#password").value;
-    const username = 'Dixon';
-    const email = 'email';
+    const username = sessionStorage.username;
+    const email = sessionStorage.email;
+    console.log("session storage", sessionStorage);
 
     const userObj = {
         "email": email
@@ -34,8 +38,9 @@ window.onload = async function (evt) {
             if (userSolarSystemIdsList.length > 0) {
                 axios.get(systemUrl, { params: { getAll: true } })
                     .then((res) => {
-                        console.log("response", res.data);
+
                         populateSolarSystems(res.data);
+
 
                     })
 
@@ -46,10 +51,15 @@ window.onload = async function (evt) {
 
             // populateSolarSystems(userSolarSystemIdsList);
 
+            const createBtn = document.getElementById("create");
+            createBtn.addEventListener('click', createSolar);
+
+            const destroyBtn = document.getElementById("Delete");
+            destroyBtn.addEventListener('click', destroySolarSystem);
 
         })
 
-    //get solar system
+
 
 
 
@@ -57,62 +67,96 @@ window.onload = async function (evt) {
 
 
     function populateSolarSystems(solarSystemData) {
+        // console.log("id", solarSystemData.solarSystemModels[0].systemId);
+        // console.log("name", solarSystemData.solarSystemModels[0].systemName);
+        // console.log("bodies", solarSystemData.solarSystemModels[0].celestialBodies);
+        // console.log("distance", solarSystemData.solarSystemModels[0].distanceFromCenter);
+        // console.log("username", solarSystemData.solarSystemModels[0].username);
+        // console.log("array length", solarSystemData.solarSystemModels.length);
+
 
 
         let thead = solarSystemTable.createTHead();
         let tbody = solarSystemTable.createTBody();
         let row = thead.insertRow();
 
-        // for (let header in solarSystemData) {
-        //     let th = document.createElement("th");
-        //     let text = document.createTextNode(solarSystemData.solarSystemModels[0].systemId);
-        //     th.appendChild(text);
-        //     row.appendChild(th);
-        // }
 
 
-        let th = document.createElement("th");
-        let text = document.createTextNode('Solar System Ids');
-        th.appendChild(text);
-        row.appendChild(th);
-
-        let th1 = document.createElement("th");
-        let text1 = document.createTextNode('System Name');
-        th1.appendChild(text1);
-        row.appendChild(th1);
-
-        let th2 = document.createElement("th");
-        let text2 = document.createTextNode('Celestial Bodies');
-        th2.appendChild(text2);
-        row.appendChild(th2);
-
-        let th3 = document.createElement("th");
-        let text3 = document.createTextNode('Distance From Center');
-        th3.appendChild(text3);
-        row.appendChild(th3);
-
-        let th4 = document.createElement("th");
-        let text4 = document.createTextNode('Username');
-        th4.appendChild(text4);
-        row.appendChild(th4);
+        let headers = ["Solar System Ids", 'System Name', 'Celestial Bodies', 'Distance From Center', 'Username'];
 
 
+        for (let key in solarSystemData.solarSystemModels[0]) {
+            let th = document.createElement("th");
+            let text = document.createTextNode(key);
+            th.appendChild(text);
+            row.appendChild(th);
+        }
 
-        // for (let key in solarSystemData) {
-        //     let th = document.createElement("th");
-        //     let text = document.createTextNode('User Solar System Ids');
-        //     th.appendChild(text);
-        //     row.appendChild(th);
-        // }
+        for (let system of solarSystemData.solarSystemModels) {
+            let row = tbody.insertRow();
+            for (key in system) {
+                let cell = row.insertCell();
+                let text = document.createTextNode(system[key]);
+                cell.appendChild(text);
+            }
+        }
 
-        // for (let solarSystem of solarSystemData) {
-        //     let row = tbody.insertRow();
-        //     //for (key in solarSystem) 
-        //     let cell = row.insertCell();
-        //     let text = document.createTextNode(solarSystem);
-        //     cell.appendChild(text);
 
-        // }
     }
 }
+
+const createSolar = async (evt) => {
+    evt.preventDefault();
+    console.log("Creating New Solar System...");
+
+    const username = sessionStorage.username;
+    const solarSystemName = document.getElementById("solarSystem-name").value;
+    const solarObj = {
+        "username": username,
+        "systemName": solarSystemName
+    };
+    console.log(username);
+    console.log(solarSystemName);
+    const url = `https://6e43teedbd.execute-api.us-west-2.amazonaws.com/Teststage/user/${username}/solarSystem/`
+
+    axios.post(url, solarObj)
+        .then((res) => {
+            console.log("response", res.data);
+            console.log("errorType", res.data.errorType);
+            const errorType = res.data.errorType;
+            window.location.reload();
+
+            // persist the data to a session like variable
+            //persistUserdata(res.data.userModel);
+            //window.location.replace("/user/user-home.html");
+
+        })
+
+    // .catch(function (error) {
+    //   console.log("error",error);
+
+    //})
+}
+
+const destroySolarSystem = async (evt) => {
+    evt.preventDefault();
+    console.log("Delete Solar System...");
+
+    const username = sessionStorage.username;
+    const systemId = document.getElementById("delete-solarSystem-id").value;
+
+    const url = `https://6e43teedbd.execute-api.us-west-2.amazonaws.com/Teststage/user/${username}/solarSystem/`
+    axios.delete(url, {
+        params: {
+            systemId: systemId
+        }
+    })
+        .then((res) => {
+            console.log("response", res.data);
+            console.log("errorType", res.data.errorType);
+            const errorType = res.data.errorType;
+
+        })
+}
+
 

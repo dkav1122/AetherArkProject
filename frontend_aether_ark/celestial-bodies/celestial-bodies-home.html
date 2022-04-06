@@ -1,7 +1,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport content=" width=device-width, initial-scale="1.0">
-  <link rel="stylesheet" href="/styles/template.css">
+  <link rel="stylesheet" href="/styles/template copy.css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="/scripts/celestialBody.js" defer></script>
   <script src="/components/header.js" defer></script>
@@ -116,7 +116,19 @@
               <input type="text" name="email_id" placeholder="Ex: 50">
               <br><br>
               New Composition:<br>
-              <input type="text" name="email_id" placeholder="RED_DWARF">
+              <select id="myList" onchange="favTutorial()">
+                <option> ---Choose--- </option>
+                <option> SOLAR_SUN </option>
+                <option> RED_GIANT </option>
+                <option> RED_DWARF </option>
+                <option> WHITE_DWARF </option>
+                <option> BLUE_DWARF </option>
+                <option> EARTH_PLANET </option>
+                <option> SUPER_EARTH </option>
+                <option> ICE_GIANT </option>
+                <option> GAS_GIANT </option>
+              </select>
+
               <br><br>
 
 

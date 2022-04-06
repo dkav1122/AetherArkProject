@@ -27,11 +27,11 @@ table {
 table,
 th,
 td {
-  border: 1px solid black;
+  border: 1px solid rgb(8, 8, 8);
 }
 
 th {
-  background: #99ffa2;
+  background: #1bf1c3;
 }
 
 th,
