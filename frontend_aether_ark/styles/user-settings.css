@@ -1,11 +1,18 @@
- body {
+
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  body {
     color: #333;
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.539);
+    background-color: rgba(0, 0, 0, 0.295);
   }
-  
+
   main {
     flex: 1 0 auto;
   }
@@ -20,23 +27,4 @@ body {
   height: 100%;
 }
 
-
-table {
-  border-collapse: collapse;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
-}
-
-th {
-  background: #99ffa2;
-}
-
-th,
-td {
-  padding: 6px;
-}
 

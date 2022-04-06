@@ -3,12 +3,14 @@ import {persistUserdata, InvalidAttributeValueException, UserNotFoundException }
 window.onload = () => {
   const loginBtn = document.getElementById("login");
   loginBtn.addEventListener('click', login);
+  // const spin = document.getElementsByClassName("spin");
   console.log(sessionStorage); 
 }
 
 const login = async (evt) => {
   evt.preventDefault();
   console.log("Logging in...");
+  // displaySpinner();
 
   const username = document.getElementById("login-username").value;
   const email = document.getElementById("login-email").value;
@@ -34,6 +36,7 @@ const login = async (evt) => {
       window.location.reload();
     };
     // persist the data to a session like variable
+
     persistUserdata(res.data.user);
     window.location.replace("/user/user-home.html");
 
@@ -43,4 +46,8 @@ const login = async (evt) => {
   })
 }
 
+// function displaySpinner() {
+// document.getElementsByClassName("spin").visibility = visible;
+  
+// } 
 

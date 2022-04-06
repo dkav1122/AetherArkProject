@@ -18,13 +18,13 @@ body {
 }
 
 main {
-  flex: 1 0 auto;  
+  flex: 1 1 auto;  
 }
 
 #user-view-area {
+  position: relative;
   background-color: rgba(102, 93, 109, 0.662);
-  align-content: center;
-
+  text-align: center;
 }
 .vertical-menu {
   width: 300px;
@@ -52,8 +52,9 @@ main {
 
 #grid-container{
   display: grid;
-  grid-template-columns: 300px auto;
+  grid-template-columns: 300px auto auto;
   grid-area: auto;
   position: relative; 
+  height: min-content;
   
 }
