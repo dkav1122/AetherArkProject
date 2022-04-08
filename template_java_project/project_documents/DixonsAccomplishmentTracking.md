@@ -36,7 +36,7 @@ instructors by the end of the unit._
 
 ## Week 1
 
-**Goals:**
+**Goals:** Test Edit
 
 **Activity:**
 
