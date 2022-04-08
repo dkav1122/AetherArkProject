@@ -36,40 +36,40 @@ instructors by the end of the unit._
 
 ## Week 1
 
-**Goals:** Test Edit
+**Goals:** Create a design for Aether Ark - what we want our user to be able to do. 
 
-**Activity:**
+**Activity:** Standup meetings with the team and creating our team charter. 
 
 **Important Docs, Commits, or Code Reviews**:
 
-**Things learned:**
+**Things learned:** Being able to communicate clearly our ideas, and the importance of using diagramming tools. 
 
 ## Week 2
 
-**Goals:**
+**Goals:** Creating The Activities and dependency Injection. 
 
-**Activity:**
+**Activity:** Designing activities, writing custom exceptions, and using Dagger dependency Injection. 
 
 **Important Docs, Commits, or Code Reviews**:
 
-**Things learned:**
+**Things learned:** When you have a solid plan, coding out the solution is quite effortless. Vice versa, not having a plan, or having a bad plan, takes a lot of extra work. 
 
 ## Week 3
 
-**Goals:**
+**Goals:** Connecting with Lambda Functions and API Gateway. 
 
-**Activity:**
+**Activity:** Documenting our API and fixing bugs in our code. 
 
 **Important Docs, Commits, or Code Reviews**:
 
-**Things learned:**
+**Things learned:** Tests are difficult at first, but ultimately save time and make debugging easier. Single Responsibility Principle matters. 
 
 ## Week 4
 
-**Goals:**
+**Goals:** Learning front end tech stack
 
-**Activity:**
+**Activity:** Creating a front end with CSS and HTML, and doing basic CRUD with javascript
 
 **Important Docs, Commits, or Code Reviews**:
 
-**Things learned:**
+**Things learned:** Approaching a new technology(like javascript) with an attitude of curiosity and fun makes the learning process much better. 
