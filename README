@@ -1,1 +1,4 @@
-https://github.com/dkav1122/AetherArkProject/blob/f4dd80c0549b86aae8d89443e0d66297fb880812/template_java_project/project_documents/aether_ark_design_document.md
+Aether_Ark
+This service will allow a user to create their own solar system. The user can input values for each celestial body they want to create, and will be shown a visual representation of the system that they make. Celestial objects will be made separately and then added or removed from a solar system.
+
+Java | Dagger | AWS Lambda | DynamoDb | AWS API Gateway | Mockito
