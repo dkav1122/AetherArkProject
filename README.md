@@ -14,18 +14,3 @@ Java | Dagger | AWS Lambda | DynamoDb | AWS API Gateway | Mockito
 
 >Aether Ark will provide a web interface for users to manage their solar systems. A login page for users to login or create an account, and main page for users to choose between creating, updating, retrieving, and deleting celestial bodies and solar systems.
 
-## Screenshots
-
-
-
-List<String> celestialBodyIds; 
-## Stats
-Work in progress
-## Bugs
-## Future Development
-implement auth2
-
-refactor user
-
-planets use physics engine
-<!-- Markdown link & img dfn's -->
