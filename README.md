@@ -4,6 +4,7 @@
 
 
 >This service was part of group project while enrolled at BloomTech's Backend Web Development program. 
+>START HERE -> AetherArkProject/template_java_project/src/com.aetherark.service/activity
 
 
 Java | Dagger | AWS Lambda | DynamoDb | AWS API Gateway | Mockito
